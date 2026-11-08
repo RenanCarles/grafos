@@ -1,0 +1,40 @@
+:host { display: block; }
+
+.topo h1 { margin: 0 0 16px; font-size: 1.5rem; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(360px, 540px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.formulario { display: grid; gap: 4px; }
+.formulario section { display: grid; gap: 4px; margin-bottom: 8px; }
+
+.formulario h2,
+.previa h2 {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--viz-ink-2);
+}
+
+.linha { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.acoes { display: flex; justify-content: flex-end; gap: 8px; }
+.erro { margin: 0; color: var(--mat-sys-error); }
+
+.previa {
+  position: sticky;
+  top: 0;
+  min-height: 480px;
+  padding: 16px;
+  border: 1px solid var(--viz-grid);
+  border-radius: 12px;
+  background: var(--viz-surface);
+}
+
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+  .linha { grid-template-columns: 1fr; }
+}

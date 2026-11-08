@@ -1,0 +1,75 @@
+<div class="barra">
+  <mat-button-toggle-group [value]="exibicao()" (change)="exibicao.set($event.value)" aria-label="Forma de exibição">
+    <mat-button-toggle value="grafico">Gráfico</mat-button-toggle>
+    <mat-button-toggle value="tabela">Tabela</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<div class="area">
+  @if (modelo(); as m) {
+    @if (!m.vazio) {
+      <div
+        echarts
+        class="grafico"
+        role="img"
+        aria-label="Gráfico de áreas e temas de pesquisa"
+        [options]="m.opcoes"
+        [autoResize]="true"
+        [hidden]="exibicao() !== 'grafico'"
+        [class.recarregando]="recarregando()"
+      ></div>
+
+      @if (exibicao() === 'tabela') {
+        <table class="tabela">
+          <caption class="sr-only">Áreas e temas de pesquisa</caption>
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Grupo</th>
+              <th scope="col" class="num">Pesquisadores</th>
+              <th scope="col" class="num">Colaborações</th>
+              <th scope="col">Área-ponte</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (linha of m.linhas; track linha.nome + linha.grupo) {
+              <tr>
+                <td>{{ linha.nome }}</td>
+                <td>{{ linha.grupo }}</td>
+                <td class="num">{{ linha.pesquisadores }}</td>
+                <td class="num">{{ linha.colaboracoes ?? '—' }}</td>
+                <td>{{ linha.ponte === null ? '—' : linha.ponte ? 'Sim' : 'Não' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  }
+
+  @if (mostrarEstado()) {
+    <app-estado-pagina
+      class="estado"
+      [estado]="estado()"
+      [vazio]="vazio()"
+      [mensagemErro]="mensagemErro()"
+      mensagemVazio="Nenhuma área com pesquisadores nos filtros atuais."
+      (tentarNovamente)="recarregar()"
+    />
+  }
+</div>
+
+@if (modelo(); as m) {
+  @if (!m.vazio && exibicao() === 'grafico') {
+    @if (m.legenda.length > 0) {
+      <ul class="legenda" aria-label="Legenda">
+        @for (item of m.legenda; track item.rotulo) {
+          <li><span class="cor" [style.background]="item.cor"></span>{{ item.rotulo }}</li>
+        }
+      </ul>
+    }
+    @if (m.nota) {
+      <p class="dica">{{ m.nota }}</p>
+    }
+  }
+}

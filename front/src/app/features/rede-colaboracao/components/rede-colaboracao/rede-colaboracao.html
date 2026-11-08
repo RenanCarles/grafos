@@ -1,0 +1,71 @@
+<div class="barra">
+  <mat-button-toggle-group [value]="exibicao()" (change)="exibicao.set($event.value)" aria-label="Forma de exibição">
+    <mat-button-toggle value="grafico">Grafo</mat-button-toggle>
+    <mat-button-toggle value="tabela">Tabela</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<div class="area">
+  <div
+    class="grafo"
+    #grafo
+    role="img"
+    aria-label="Grafo da rede de colaboração entre pesquisadores"
+    [hidden]="exibicao() !== 'grafico'"
+    [class.recarregando]="recarregando()"
+  ></div>
+
+  @if (exibicao() === 'tabela' && modelo(); as m) {
+    <table class="tabela">
+      <caption class="sr-only">Pesquisadores da rede de colaboração</caption>
+      <thead>
+        <tr>
+          <th scope="col">Pesquisador</th>
+          <th scope="col">Instituto</th>
+          <th scope="col">Áreas</th>
+          <th scope="col" class="num">Grau</th>
+          <th scope="col" class="num">Intermediação</th>
+          <th scope="col" class="num">Grupo</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (linha of m.linhas; track linha.id) {
+          <tr>
+            <td>{{ linha.nome }}</td>
+            <td>{{ linha.instituto }}</td>
+            <td>{{ linha.areas }}</td>
+            <td class="num">{{ linha.grau }}</td>
+            <td class="num">{{ linha.intermediacao.toFixed(3) }}</td>
+            <td class="num">{{ linha.grupo }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  @if (tooltip(); as t) {
+    <div class="tooltip-no" role="tooltip" [style.left.px]="t.x + 12" [style.top.px]="t.y + 12">{{ t.texto }}</div>
+  }
+
+  @if (mostrarEstado()) {
+    <app-estado-pagina
+      class="estado"
+      [estado]="estado()"
+      [vazio]="vazio()"
+      [mensagemErro]="mensagemErro()"
+      mensagemVazio="Nenhum pesquisador corresponde aos filtros."
+      (tentarNovamente)="recarregar()"
+    />
+  }
+</div>
+
+@if (modelo(); as m) {
+  @if (exibicao() === 'grafico') {
+    <ul class="legenda" aria-label="Legenda">
+      @for (item of m.legenda; track item.rotulo) {
+        <li><span class="cor" [style.background]="item.cor"></span>{{ item.rotulo }}</li>
+      }
+    </ul>
+    <p class="dica">Linha contínua: coautoria · pontilhada: orientação · tracejada: projeto</p>
+  }
+}

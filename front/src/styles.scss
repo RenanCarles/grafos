@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+
+html {
+  color-scheme: light dark;
+
+  @include mat.theme((
+    color: (primary: mat.$cyan-palette, theme-type: color-scheme),
+    typography: (
+      plain-family: (system-ui, 'Segoe UI', sans-serif),
+      brand-family: (system-ui, 'Segoe UI', sans-serif),
+    ),
+    density: 0,
+  ));
+
+  @include mat.theme-overrides((
+    primary: light-dark(#00707a, #5fd0d6),
+    on-primary: light-dark(#ffffff, #003a40),
+    surface: light-dark(#faf9f6, #17181a),
+    background: light-dark(#f3f1ec, #0f1011),
+    on-surface: light-dark(#1c1b19, #f2f0ea),
+    on-background: light-dark(#1c1b19, #f2f0ea),
+  ));
+}
+
+:root {
+  --viz-surface: light-dark(#faf9f6, #17181a);
+  --viz-page: light-dark(#f3f1ec, #0f1011);
+  --viz-ink: light-dark(#1c1b19, #f2f0ea);
+  --viz-ink-2: light-dark(#52514e, #c3c2b7);
+  --viz-muted: #898781;
+  --viz-grid: light-dark(#e1e0d9, #2c2c2a);
+  --viz-axis: light-dark(#c3c2b7, #383835);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--viz-page);
+  color: var(--viz-ink);
+  font-family: system-ui, 'Segoe UI', sans-serif;
+}

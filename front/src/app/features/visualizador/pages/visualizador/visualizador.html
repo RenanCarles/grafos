@@ -1,0 +1,23 @@
+<app-estado-pagina [estado]="estado()" [mensagemErro]="mensagemErro()" (tentarNovamente)="recarregar()">
+  @if (visao(); as v) {
+    <header class="topo">
+      <div>
+        <a mat-button routerLink="/visoes"><mat-icon>arrow_back</mat-icon> Visões</a>
+        <h1>{{ v.nome }}</h1>
+        @if (v.descricao) {
+          <p class="sub">{{ v.descricao }}</p>
+        }
+      </div>
+      <a mat-stroked-button [routerLink]="['/visoes', v.id, 'editar']"><mat-icon>edit</mat-icon> Editar</a>
+    </header>
+
+    <div class="conteudo" [class.com-painel]="v.tipo === 'rede'">
+      <app-visualizacao-visao [visao]="v" (noSelecionado)="noSelecionado.set($event)" />
+      @if (v.tipo === 'rede') {
+        <aside class="painel" aria-label="Detalhes do pesquisador">
+          <app-painel-pesquisador [no]="noSelecionado()" />
+        </aside>
+      }
+    </div>
+  }
+</app-estado-pagina>

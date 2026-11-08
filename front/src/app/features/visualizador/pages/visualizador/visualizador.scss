@@ -1,0 +1,26 @@
+:host { display: block; }
+
+.topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+h1 { margin: 4px 0 0; font-size: 1.5rem; }
+.sub { margin: 4px 0 0; color: var(--viz-ink-2); }
+
+.conteudo { display: grid; gap: 24px; }
+.conteudo.com-painel { grid-template-columns: minmax(0, 1fr) 280px; align-items: start; }
+
+.painel {
+  padding: 16px;
+  border: 1px solid var(--viz-grid);
+  border-radius: 12px;
+  background: var(--viz-surface);
+}
+
+@media (max-width: 960px) {
+  .conteudo.com-painel { grid-template-columns: 1fr; }
+}

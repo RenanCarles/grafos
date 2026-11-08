@@ -1,0 +1,23 @@
+:host { display: block; }
+
+.topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+h1 { margin: 0; font-size: 1.5rem; }
+.sub { margin: 4px 0 0; color: var(--viz-ink-2); }
+
+.grade {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.cartao { height: 100%; background: var(--viz-surface); }
