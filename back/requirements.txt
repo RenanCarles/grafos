@@ -1,0 +1,5 @@
+networkx==3.4.2        # métricas (intermediação, Louvain)
+fastapi>=0.115         # API
+uvicorn>=0.30          # servidor da API
+pytest>=8              # testes
+httpx>=0.27            # TestClient da API (testes)

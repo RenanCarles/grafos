@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Bruto do OpenAlex (~25 MB). Versionar é opcional: dá para baixar de novo com `python -m pipeline --coletar`.
+# Descomente se o grupo preferir não versionar:
+# dados/brutos/openalex_works_unifei.json
