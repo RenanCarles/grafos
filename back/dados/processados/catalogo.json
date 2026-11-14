@@ -1,0 +1,89 @@
+{
+ "institutos": [
+  {
+   "id": "pa",
+   "sigla": "PA",
+   "nome": "CAMPUS POUSO ALEGRE - UNIFEI",
+   "cor": "#17becf",
+   "docentes": 9
+  },
+  {
+   "id": "icpa",
+   "sigla": "ICPA",
+   "nome": "INSTITUTO DE CIÊNCIAS PURAS E APLICADAS",
+   "cor": "#4e79a7",
+   "docentes": 71
+  },
+  {
+   "id": "ict",
+   "sigla": "ICT",
+   "nome": "INSTITUTO DE CIÊNCIAS TECNOLÓGICAS",
+   "cor": "#f28e2b",
+   "docentes": 46
+  },
+  {
+   "id": "iedu",
+   "sigla": "IEDU",
+   "nome": "INSTITUTO DE EDUCAÇÃO",
+   "cor": "#e15759",
+   "docentes": 14
+  },
+  {
+   "id": "iepg",
+   "sigla": "IEPG",
+   "nome": "INSTITUTO DE ENGENHARIA DE PRODUÇÃO E GESTÃO",
+   "cor": "#76b7b2",
+   "docentes": 57
+  },
+  {
+   "id": "iesti",
+   "sigla": "IESTI",
+   "nome": "INSTITUTO DE ENGENHARIA DE SISTEMAS E TECNOLOGIA DA INFORMAÇÃO",
+   "cor": "#59a14f",
+   "docentes": 43
+  },
+  {
+   "id": "iem",
+   "sigla": "IEM",
+   "nome": "INSTITUTO DE ENGENHARIA MECÂNICA",
+   "cor": "#edc948",
+   "docentes": 59
+  },
+  {
+   "id": "iei",
+   "sigla": "IEI",
+   "nome": "INSTITUTO DE ENGENHARIAS INTEGRADAS",
+   "cor": "#b07aa1",
+   "docentes": 53
+  },
+  {
+   "id": "ifq",
+   "sigla": "IFQ",
+   "nome": "INSTITUTO DE FÍSICA E QUÍMICA",
+   "cor": "#ff9da7",
+   "docentes": 59
+  },
+  {
+   "id": "imc",
+   "sigla": "IMC",
+   "nome": "INSTITUTO DE MATEMÁTICA E COMPUTACÃO",
+   "cor": "#9c755f",
+   "docentes": 49
+  },
+  {
+   "id": "irn",
+   "sigla": "IRN",
+   "nome": "INSTITUTO DE RECURSOS NATURAIS",
+   "cor": "#bcbd22",
+   "docentes": 59
+  },
+  {
+   "id": "isee",
+   "sigla": "ISEE",
+   "nome": "INSTITUTO DE SISTEMAS ELÉTRICOS E ENERGIA",
+   "cor": "#d62728",
+   "docentes": 30
+  }
+ ],
+ "areas": []
+}

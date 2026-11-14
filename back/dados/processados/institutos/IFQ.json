@@ -1,0 +1,2503 @@
+{
+ "foco": {
+  "id": "ifq",
+  "sigla": "IFQ"
+ },
+ "resumo": {
+  "docentesFoco": 59,
+  "docentesFocoSemAresta": 28,
+  "vizinhosExternos": 26,
+  "vizinhosPorInstituto": {
+   "IEDU": 5,
+   "IEM": 4,
+   "ISEE": 4,
+   "IEI": 4,
+   "IMC": 4,
+   "IRN": 3,
+   "ICPA": 2
+  },
+  "arestasPorClasse": {
+   "foco": 51,
+   "ponte": 43,
+   "fora": 21
+  },
+  "pesoPorClasse": {
+   "foco": 26.859639,
+   "ponte": 25.289048,
+   "fora": 17.525079
+  },
+  "pesoPontesPorInstituto": {
+   "ICPA": 7.958095,
+   "IEDU": 3.666667,
+   "IMC": 3.316667,
+   "ISEE": 3.104762,
+   "IEM": 3.059524,
+   "IEI": 2.383333,
+   "IRN": 1.8
+  }
+ },
+ "nos": [
+  {
+   "id": "doc-431e8ba156",
+   "nome": "ADHIMAR FLAVIO OLIVEIRA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 14,
+   "forcaSub": 15.592619,
+   "grauPonte": 5,
+   "forcaPonte": 7.787381
+  },
+  {
+   "id": "doc-472015f33b",
+   "nome": "JOAO RICARDO NEVES DA SILVA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 7,
+   "forcaSub": 5.833333,
+   "grauPonte": 2,
+   "forcaPonte": 1.833333
+  },
+  {
+   "id": "doc-ca7941082e",
+   "nome": "AGENOR PINA DA SILVA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 7,
+   "forcaSub": 5.416667,
+   "grauPonte": 1,
+   "forcaPonte": 0.333333
+  },
+  {
+   "id": "doc-69c9bdedef",
+   "nome": "DANILO ROQUE HUANCA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 3,
+   "forcaSub": 4.303333,
+   "grauPonte": 2,
+   "forcaPonte": 1.143333
+  },
+  {
+   "id": "doc-6e2a50852d",
+   "nome": "DANIELA SACHS",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 10,
+   "forcaSub": 4.004004,
+   "grauPonte": 6,
+   "forcaPonte": 3.329762
+  },
+  {
+   "id": "doc-2252bd329b",
+   "nome": "MIKAEL FRANK REZENDE JUNIOR",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 6,
+   "forcaSub": 4.0,
+   "grauPonte": 3,
+   "forcaPonte": 1.166667
+  },
+  {
+   "id": "doc-b79c01881a",
+   "nome": "SANDRO JOSE DE ANDRADE",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 7,
+   "forcaSub": 3.7,
+   "grauPonte": 1,
+   "forcaPonte": 0.333333
+  },
+  {
+   "id": "doc-cb094619ae",
+   "nome": "MARIA ELENA LEYVA GONZALEZ",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 7,
+   "forcaSub": 3.471429,
+   "grauPonte": 4,
+   "forcaPonte": 1.742857
+  },
+  {
+   "id": "doc-a47576ee77",
+   "nome": "THIAGO COSTA CAETANO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 3,
+   "forcaSub": 3.416667,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-69a943643c",
+   "nome": "LUCIANO FERNANDES SILVA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 6,
+   "forcaSub": 3.166667,
+   "grauPonte": 1,
+   "forcaPonte": 1.5
+  },
+  {
+   "id": "doc-02c6255a3d",
+   "nome": "FLAVIO SOARES SILVA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 6,
+   "forcaSub": 2.958333,
+   "grauPonte": 1,
+   "forcaPonte": 0.333333
+  },
+  {
+   "id": "doc-166b64b43c",
+   "nome": "MILADY RENATA APOLINARIO DA SILVA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 6,
+   "forcaSub": 2.475,
+   "grauPonte": 1,
+   "forcaPonte": 0.15
+  },
+  {
+   "id": "doc-496bb39870",
+   "nome": "FABIO DA SILVA LISBOA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 5,
+   "forcaSub": 2.3,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-fc6826bf44",
+   "nome": "FREDERICO BARROS DE SOUSA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 6,
+   "forcaSub": 2.18254,
+   "grauPonte": 1,
+   "forcaPonte": 0.6
+  },
+  {
+   "id": "doc-4b87185da7",
+   "nome": "ROSSANO GIMENES",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 5,
+   "forcaSub": 2.132576,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-8f89985df6",
+   "nome": "FABIO NAKAGOMI",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 7,
+   "forcaSub": 1.838095,
+   "grauPonte": 3,
+   "forcaPonte": 1.209524
+  },
+  {
+   "id": "doc-27d1c11d63",
+   "nome": "MARCIA MATIKO KONDO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 4,
+   "forcaSub": 1.641667,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-9ad3f71b15",
+   "nome": "JULIANA MARIA SAMPAIO FURLANI",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 4,
+   "forcaSub": 1.5,
+   "grauPonte": 3,
+   "forcaPonte": 1.166667
+  },
+  {
+   "id": "doc-ff3072a79f",
+   "nome": "NEWTON DE FIGUEIREDO FILHO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 3,
+   "forcaSub": 1.416667,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-739f536c0d",
+   "nome": "LEONARDO DOS SANTOS CUNHA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 3,
+   "forcaSub": 1.0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-6831db0520",
+   "nome": "EDUARDO HENRIQUE SILVA BITTENCOURT",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 1,
+   "forcaSub": 1.0,
+   "grauPonte": 1,
+   "forcaPonte": 1.0
+  },
+  {
+   "id": "doc-dfb3b4a3d8",
+   "nome": "EDER DO COUTO TAVARES",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 6,
+   "forcaSub": 0.857143,
+   "grauPonte": 1,
+   "forcaPonte": 0.142857
+  },
+  {
+   "id": "doc-e327b5fc5f",
+   "nome": "ERNESTO SOARES DE FREITAS NETO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 4,
+   "forcaSub": 0.85,
+   "grauPonte": 3,
+   "forcaPonte": 0.65
+  },
+  {
+   "id": "doc-805b0dc599",
+   "nome": "ROBERTO SHIGUERU NOBUYASU JUNIOR",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 2,
+   "forcaSub": 0.789683,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-e89d9d4bbe",
+   "nome": "JULIANA FEDOCE LOPES",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 3,
+   "forcaSub": 0.685714,
+   "grauPonte": 1,
+   "forcaPonte": 0.2
+  },
+  {
+   "id": "doc-3b5528f55a",
+   "nome": "DANIEL HENRIQUES SOARES LEAL",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 3,
+   "forcaSub": 0.5,
+   "grauPonte": 1,
+   "forcaPonte": 0.166667
+  },
+  {
+   "id": "doc-b6e6cc4c7d",
+   "nome": "PALOMA ALINNE ALVES RODRIGUES",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 1,
+   "forcaSub": 0.5,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-824a09c06c",
+   "nome": "MAURICIO FROTA SARAIVA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 3,
+   "forcaSub": 0.5,
+   "grauPonte": 1,
+   "forcaPonte": 0.166667
+  },
+  {
+   "id": "doc-b437e1dd2b",
+   "nome": "EVANDRO FORTES ROZENTALSKI",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 1,
+   "forcaSub": 0.5,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-17f95800ce",
+   "nome": "DANIELLE APARECIDA REIS LEITE",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 1,
+   "forcaSub": 0.333333,
+   "grauPonte": 1,
+   "forcaPonte": 0.333333
+  },
+  {
+   "id": "doc-52c23960b8",
+   "nome": "MAURICIO SILVA DOS SANTOS",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 1,
+   "forcaSub": 0.142857,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-b87d6ac09e",
+   "nome": "CAIO CESAR HOLANDA RIBEIRO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-b2e28b7f8f",
+   "nome": "ISABEL CRISTINA DE MOURA CARVALHO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-c1f78f8e60",
+   "nome": "VITORIO ALBERTO DE LORENCI",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-04b5d7dc0b",
+   "nome": "FATIMA MARIA PEREIRA DE REZENDE",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-f4056ae0be",
+   "nome": "MARCELOS LIMA PERES",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-6a6529c8b0",
+   "nome": "WILTON DA SILVA DIAS",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-3baf4fc3ed",
+   "nome": "FABRICIO AUGUSTO BARONE RANGEL",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-20d6d39a83",
+   "nome": "GEISE RIBEIRO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-72b5ce152e",
+   "nome": "FILIBERTO GONZALEZ GARCIA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-f366f9e163",
+   "nome": "HEKTOR STHENOS ALVES MONTEIRO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-7d566c3d7f",
+   "nome": "GABRIEL RODRIGUES HICKEL",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-f3d7235002",
+   "nome": "GABRIEL FLORES HIDALGO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-0011a1a594",
+   "nome": "JANE RAQUEL SILVA DE OLIVEIRA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-6f5b5d3014",
+   "nome": "OSCAR CAVICHIA DE MORAES",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-9b49c5689f",
+   "nome": "SANDRA NAKAMATSU",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-6837d72057",
+   "nome": "ALEXIS ROA AGUIRRE",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-8fd05c5c4e",
+   "nome": "GERALDO MAGELA DE LIMA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-f4c44e98c1",
+   "nome": "SUELEN DE CASTRO",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-20e5763b4b",
+   "nome": "DIEGO CORREIA DOS SANTOS",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-c4e61efd75",
+   "nome": "ANTONIO CARLOS LEITE",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-8aee77ae07",
+   "nome": "LUCAS HENRICO PEREIRA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-437ca1022e",
+   "nome": "NICOLI CANDIDO VILAS BOAS",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-4f2cc3d78a",
+   "nome": "JOAO PEDRO DE OLIVEIRA BRAGA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-92659fe112",
+   "nome": "ELIAS VITOR BORDINHON",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-b34fb0d6a4",
+   "nome": "CLAUDEMIR BATISTA DOS SANTOS",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-61a246cf3c",
+   "nome": "HELDER LUIZ DE OLIVEIRA",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-8dd4f510ff",
+   "nome": "EDUARDO OLIVEIRA RESEK",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-43aaf86305",
+   "nome": "ANTONIO JOSE FARIA BOMBARD",
+   "institutoId": "ifq",
+   "noFoco": true,
+   "grauSub": 0,
+   "forcaSub": 0,
+   "grauPonte": 0,
+   "forcaPonte": 0
+  },
+  {
+   "id": "doc-d90ac34150",
+   "nome": "MIRIAN DE LOURDES NORONHA MOTTA MELO",
+   "institutoId": "iem",
+   "noFoco": false,
+   "grauSub": 6,
+   "forcaSub": 6.286508,
+   "grauPonte": 2,
+   "forcaPonte": 1.161111
+  },
+  {
+   "id": "doc-0fe567bf8e",
+   "nome": "RERO MARQUES RUBINGER",
+   "institutoId": "icpa",
+   "noFoco": false,
+   "grauSub": 3,
+   "forcaSub": 6.137857,
+   "grauPonte": 2,
+   "forcaPonte": 5.77119
+  },
+  {
+   "id": "doc-d8362598f1",
+   "nome": "VALQUIRIA CLARET DOS SANTOS",
+   "institutoId": "irn",
+   "noFoco": false,
+   "grauSub": 6,
+   "forcaSub": 5.939286,
+   "grauPonte": 3,
+   "forcaPonte": 1.308333
+  },
+  {
+   "id": "doc-e5468ff6ed",
+   "nome": "PAULO CESAR GONCALVES",
+   "institutoId": "irn",
+   "noFoco": false,
+   "grauSub": 4,
+   "forcaSub": 4.163095,
+   "grauPonte": 1,
+   "forcaPonte": 0.125
+  },
+  {
+   "id": "doc-817647a07d",
+   "nome": "ESTACIO TAVARES WANDERLEY NETO",
+   "institutoId": "isee",
+   "noFoco": false,
+   "grauSub": 6,
+   "forcaSub": 3.819762,
+   "grauPonte": 4,
+   "forcaPonte": 2.204762
+  },
+  {
+   "id": "doc-75ec6a6bcb",
+   "nome": "ELIANE MATESCO CRISTOVAO",
+   "institutoId": "imc",
+   "noFoco": false,
+   "grauSub": 5,
+   "forcaSub": 3.666667,
+   "grauPonte": 2,
+   "forcaPonte": 1.666667
+  },
+  {
+   "id": "doc-38a6e57123",
+   "nome": "ALESSANDRA RODRIGUES",
+   "institutoId": "iedu",
+   "noFoco": false,
+   "grauSub": 4,
+   "forcaSub": 3.0,
+   "grauPonte": 2,
+   "forcaPonte": 0.666667
+  },
+  {
+   "id": "doc-abb329041a",
+   "nome": "GUILHERME OLIVEIRA SIQUEIRA",
+   "institutoId": "iei",
+   "noFoco": false,
+   "grauSub": 4,
+   "forcaSub": 2.727778,
+   "grauPonte": 2,
+   "forcaPonte": 0.733333
+  },
+  {
+   "id": "doc-afc0cce332",
+   "nome": "CLAUDIA ELIANE DA MATTA",
+   "institutoId": "isee",
+   "noFoco": false,
+   "grauSub": 2,
+   "forcaSub": 2.5,
+   "grauPonte": 1,
+   "forcaPonte": 0.5
+  },
+  {
+   "id": "doc-86ba9c30f9",
+   "nome": "JANAINA ROBERTA DOS SANTOS",
+   "institutoId": "iedu",
+   "noFoco": false,
+   "grauSub": 2,
+   "forcaSub": 2.5,
+   "grauPonte": 1,
+   "forcaPonte": 1.5
+  },
+  {
+   "id": "doc-01a6692606",
+   "nome": "DANIEL CRISTIAN FERREIRA SOARES",
+   "institutoId": "icpa",
+   "noFoco": false,
+   "grauSub": 6,
+   "forcaSub": 2.329762,
+   "grauPonte": 5,
+   "forcaPonte": 2.186905
+  },
+  {
+   "id": "doc-e60ee11f45",
+   "nome": "GILBERT SILVA",
+   "institutoId": "iem",
+   "noFoco": false,
+   "grauSub": 3,
+   "forcaSub": 2.308333,
+   "grauPonte": 1,
+   "forcaPonte": 0.922222
+  },
+  {
+   "id": "doc-07d0341786",
+   "nome": "GUSTAVO PAIVA LOPES",
+   "institutoId": "isee",
+   "noFoco": false,
+   "grauSub": 3,
+   "forcaSub": 2.065,
+   "grauPonte": 1,
+   "forcaPonte": 0.2
+  },
+  {
+   "id": "doc-c57a6c9796",
+   "nome": "RENY ANGELA RENZETTI",
+   "institutoId": "iei",
+   "noFoco": false,
+   "grauSub": 4,
+   "forcaSub": 2.044444,
+   "grauPonte": 2,
+   "forcaPonte": 0.733333
+  },
+  {
+   "id": "doc-8321d8660a",
+   "nome": "GABRIEL HENRIQUE DE FARIA",
+   "institutoId": "isee",
+   "noFoco": false,
+   "grauSub": 3,
+   "forcaSub": 1.59,
+   "grauPonte": 1,
+   "forcaPonte": 0.2
+  },
+  {
+   "id": "doc-a98cd0807f",
+   "nome": "FABRÍCIO VIEIRA DE ANDRADE",
+   "institutoId": "iei",
+   "noFoco": false,
+   "grauSub": 3,
+   "forcaSub": 1.516667,
+   "grauPonte": 2,
+   "forcaPonte": 0.666667
+  },
+  {
+   "id": "doc-0cf466412e",
+   "nome": "ANTONIO AUGUSTO ARAUJO PINTO DA SILVA",
+   "institutoId": "iem",
+   "noFoco": false,
+   "grauSub": 3,
+   "forcaSub": 1.227381,
+   "grauPonte": 1,
+   "forcaPonte": 0.392857
+  },
+  {
+   "id": "doc-4d70e92c10",
+   "nome": "MARCIA REGINA BALDISSERA RODRIGUES",
+   "institutoId": "irn",
+   "noFoco": false,
+   "grauSub": 5,
+   "forcaSub": 1.033333,
+   "grauPonte": 1,
+   "forcaPonte": 0.366667
+  },
+  {
+   "id": "doc-5306b53e65",
+   "nome": "LEANDRO GUSTAVO GOMES",
+   "institutoId": "imc",
+   "noFoco": false,
+   "grauSub": 1,
+   "forcaSub": 1.0,
+   "grauPonte": 1,
+   "forcaPonte": 1.0
+  },
+  {
+   "id": "doc-76a6b81fa8",
+   "nome": "MARIANA FEITEIRO CAVALARI SILVA",
+   "institutoId": "imc",
+   "noFoco": false,
+   "grauSub": 2,
+   "forcaSub": 1.0,
+   "grauPonte": 1,
+   "forcaPonte": 0.5
+  },
+  {
+   "id": "doc-01164e9b16",
+   "nome": "DENISE PEREIRA DE ALCANTARA FERRAZ",
+   "institutoId": "iedu",
+   "noFoco": false,
+   "grauSub": 2,
+   "forcaSub": 1.0,
+   "grauPonte": 1,
+   "forcaPonte": 0.5
+  },
+  {
+   "id": "doc-abd1e776d8",
+   "nome": "MARCIA DE SOUZA LUZ FREITAS",
+   "institutoId": "iedu",
+   "noFoco": false,
+   "grauSub": 3,
+   "forcaSub": 1.0,
+   "grauPonte": 2,
+   "forcaPonte": 0.666667
+  },
+  {
+   "id": "doc-e217a37660",
+   "nome": "EDMILSON OTONI CORREA",
+   "institutoId": "iem",
+   "noFoco": false,
+   "grauSub": 1,
+   "forcaSub": 0.583333,
+   "grauPonte": 1,
+   "forcaPonte": 0.583333
+  },
+  {
+   "id": "doc-09fa999708",
+   "nome": "ANDREZA DE SOUSA ANDRADA",
+   "institutoId": "iei",
+   "noFoco": false,
+   "grauSub": 2,
+   "forcaSub": 0.416667,
+   "grauPonte": 1,
+   "forcaPonte": 0.25
+  },
+  {
+   "id": "doc-af05280176",
+   "nome": "WANDERSON RODRIGUES MORAIS",
+   "institutoId": "iedu",
+   "noFoco": false,
+   "grauSub": 1,
+   "forcaSub": 0.333333,
+   "grauPonte": 1,
+   "forcaPonte": 0.333333
+  },
+  {
+   "id": "doc-6e2f3a1bc5",
+   "nome": "BRUNO GUAZZELLI BATISTA",
+   "institutoId": "imc",
+   "noFoco": false,
+   "grauSub": 1,
+   "forcaSub": 0.15,
+   "grauPonte": 1,
+   "forcaPonte": 0.15
+  }
+ ],
+ "arestas": [
+  {
+   "origemId": "doc-0fe567bf8e",
+   "destinoId": "doc-431e8ba156",
+   "classe": "ponte",
+   "peso": 5.21119,
+   "nProducoes": 18,
+   "porTipoProducao": {
+    "artigo_periodico": 16,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 2
+   }
+  },
+  {
+   "origemId": "doc-69c9bdedef",
+   "destinoId": "doc-431e8ba156",
+   "classe": "foco",
+   "peso": 3.16,
+   "nProducoes": 11,
+   "porTipoProducao": {
+    "artigo_periodico": 7,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 4
+   }
+  },
+  {
+   "origemId": "doc-d90ac34150",
+   "destinoId": "doc-d8362598f1",
+   "classe": "fora",
+   "peso": 2.461905,
+   "nProducoes": 14,
+   "porTipoProducao": {
+    "artigo_periodico": 14,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-472015f33b",
+   "destinoId": "doc-ca7941082e",
+   "classe": "foco",
+   "peso": 2.333333,
+   "nProducoes": 6,
+   "porTipoProducao": {
+    "artigo_periodico": 6,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-2252bd329b",
+   "destinoId": "doc-a47576ee77",
+   "classe": "foco",
+   "peso": 2.166667,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 5,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-d8362598f1",
+   "destinoId": "doc-e5468ff6ed",
+   "classe": "fora",
+   "peso": 2.069048,
+   "nProducoes": 12,
+   "porTipoProducao": {
+    "artigo_periodico": 12,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-afc0cce332",
+   "destinoId": "doc-38a6e57123",
+   "classe": "fora",
+   "peso": 2.0,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-d90ac34150",
+   "destinoId": "doc-e5468ff6ed",
+   "classe": "fora",
+   "peso": 1.869048,
+   "nProducoes": 11,
+   "porTipoProducao": {
+    "artigo_periodico": 11,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-69a943643c",
+   "destinoId": "doc-86ba9c30f9",
+   "classe": "ponte",
+   "peso": 1.5,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-cb094619ae",
+   "destinoId": "doc-431e8ba156",
+   "classe": "foco",
+   "peso": 1.442857,
+   "nProducoes": 7,
+   "porTipoProducao": {
+    "artigo_periodico": 5,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 2
+   }
+  },
+  {
+   "origemId": "doc-75ec6a6bcb",
+   "destinoId": "doc-472015f33b",
+   "classe": "ponte",
+   "peso": 1.333333,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-cb094619ae",
+   "destinoId": "doc-817647a07d",
+   "classe": "ponte",
+   "peso": 1.17619,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 5,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-abb329041a",
+   "destinoId": "doc-c57a6c9796",
+   "classe": "fora",
+   "peso": 1.144444,
+   "nProducoes": 4,
+   "porTipoProducao": {
+    "artigo_periodico": 4,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2a50852d",
+   "destinoId": "doc-01a6692606",
+   "classe": "ponte",
+   "peso": 1.053571,
+   "nProducoes": 7,
+   "porTipoProducao": {
+    "artigo_periodico": 7,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-817647a07d",
+   "destinoId": "doc-07d0341786",
+   "classe": "fora",
+   "peso": 1.045,
+   "nProducoes": 8,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 6
+   }
+  },
+  {
+   "origemId": "doc-496bb39870",
+   "destinoId": "doc-b79c01881a",
+   "classe": "foco",
+   "peso": 1.033333,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-d8362598f1",
+   "destinoId": "doc-431e8ba156",
+   "classe": "ponte",
+   "peso": 1.016667,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 5,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-431e8ba156",
+   "destinoId": "doc-ca7941082e",
+   "classe": "foco",
+   "peso": 1.0,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-5306b53e65",
+   "destinoId": "doc-6831db0520",
+   "classe": "ponte",
+   "peso": 1.0,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-75ec6a6bcb",
+   "destinoId": "doc-86ba9c30f9",
+   "classe": "fora",
+   "peso": 1.0,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2a50852d",
+   "destinoId": "doc-e60ee11f45",
+   "classe": "ponte",
+   "peso": 0.922222,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 5,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-a98cd0807f",
+   "destinoId": "doc-abb329041a",
+   "classe": "fora",
+   "peso": 0.85,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 4,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 1
+   }
+  },
+  {
+   "origemId": "doc-4b87185da7",
+   "destinoId": "doc-166b64b43c",
+   "classe": "foco",
+   "peso": 0.825,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-8321d8660a",
+   "destinoId": "doc-07d0341786",
+   "classe": "fora",
+   "peso": 0.82,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 2
+   }
+  },
+  {
+   "origemId": "doc-b79c01881a",
+   "destinoId": "doc-02c6255a3d",
+   "classe": "foco",
+   "peso": 0.783333,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-a47576ee77",
+   "destinoId": "doc-ca7941082e",
+   "classe": "foco",
+   "peso": 0.75,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-817647a07d",
+   "destinoId": "doc-431e8ba156",
+   "classe": "ponte",
+   "peso": 0.742857,
+   "nProducoes": 4,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 1
+   }
+  },
+  {
+   "origemId": "doc-d90ac34150",
+   "destinoId": "doc-6e2a50852d",
+   "classe": "ponte",
+   "peso": 0.711111,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 4,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 1
+   }
+  },
+  {
+   "origemId": "doc-d90ac34150",
+   "destinoId": "doc-e60ee11f45",
+   "classe": "fora",
+   "peso": 0.694444,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4b87185da7",
+   "destinoId": "doc-02c6255a3d",
+   "classe": "foco",
+   "peso": 0.691667,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 1,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-e60ee11f45",
+   "destinoId": "doc-0cf466412e",
+   "classe": "fora",
+   "peso": 0.691667,
+   "nProducoes": 4,
+   "porTipoProducao": {
+    "artigo_periodico": 4,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-496bb39870",
+   "destinoId": "doc-431e8ba156",
+   "classe": "foco",
+   "peso": 0.666667,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-805b0dc599",
+   "destinoId": "doc-fc6826bf44",
+   "classe": "foco",
+   "peso": 0.646825,
+   "nProducoes": 5,
+   "porTipoProducao": {
+    "artigo_periodico": 5,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-27d1c11d63",
+   "destinoId": "doc-b79c01881a",
+   "classe": "foco",
+   "peso": 0.616667,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-fc6826bf44",
+   "destinoId": "doc-01a6692606",
+   "classe": "ponte",
+   "peso": 0.6,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-69c9bdedef",
+   "destinoId": "doc-e217a37660",
+   "classe": "ponte",
+   "peso": 0.583333,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-431e8ba156",
+   "destinoId": "doc-ff3072a79f",
+   "classe": "foco",
+   "peso": 0.583333,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-02c6255a3d",
+   "destinoId": "doc-166b64b43c",
+   "classe": "foco",
+   "peso": 0.575,
+   "nProducoes": 3,
+   "porTipoProducao": {
+    "artigo_periodico": 3,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-8321d8660a",
+   "destinoId": "doc-817647a07d",
+   "classe": "fora",
+   "peso": 0.57,
+   "nProducoes": 4,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 2
+   }
+  },
+  {
+   "origemId": "doc-0fe567bf8e",
+   "destinoId": "doc-69c9bdedef",
+   "classe": "ponte",
+   "peso": 0.56,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 1
+   }
+  },
+  {
+   "origemId": "doc-abb329041a",
+   "destinoId": "doc-8f89985df6",
+   "classe": "ponte",
+   "peso": 0.533333,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-c57a6c9796",
+   "destinoId": "doc-8f89985df6",
+   "classe": "ponte",
+   "peso": 0.533333,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-afc0cce332",
+   "destinoId": "doc-9ad3f71b15",
+   "classe": "ponte",
+   "peso": 0.5,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-76a6b81fa8",
+   "destinoId": "doc-75ec6a6bcb",
+   "classe": "fora",
+   "peso": 0.5,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-2252bd329b",
+   "destinoId": "doc-01164e9b16",
+   "classe": "ponte",
+   "peso": 0.5,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-01164e9b16",
+   "destinoId": "doc-75ec6a6bcb",
+   "classe": "fora",
+   "peso": 0.5,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-472015f33b",
+   "destinoId": "doc-ff3072a79f",
+   "classe": "foco",
+   "peso": 0.5,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-a47576ee77",
+   "destinoId": "doc-472015f33b",
+   "classe": "foco",
+   "peso": 0.5,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-b6e6cc4c7d",
+   "destinoId": "doc-b437e1dd2b",
+   "classe": "foco",
+   "peso": 0.5,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-76a6b81fa8",
+   "destinoId": "doc-472015f33b",
+   "classe": "ponte",
+   "peso": 0.5,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-d90ac34150",
+   "destinoId": "doc-431e8ba156",
+   "classe": "ponte",
+   "peso": 0.45,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-b79c01881a",
+   "destinoId": "doc-166b64b43c",
+   "classe": "foco",
+   "peso": 0.4,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2a50852d",
+   "destinoId": "doc-0cf466412e",
+   "classe": "ponte",
+   "peso": 0.392857,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-27d1c11d63",
+   "destinoId": "doc-02c6255a3d",
+   "classe": "foco",
+   "peso": 0.375,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4d70e92c10",
+   "destinoId": "doc-0fe567bf8e",
+   "classe": "fora",
+   "peso": 0.366667,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4d70e92c10",
+   "destinoId": "doc-431e8ba156",
+   "classe": "ponte",
+   "peso": 0.366667,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-e89d9d4bbe",
+   "destinoId": "doc-fc6826bf44",
+   "classe": "foco",
+   "peso": 0.342857,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-b79c01881a",
+   "destinoId": "doc-431e8ba156",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-a98cd0807f",
+   "destinoId": "doc-b79c01881a",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-a98cd0807f",
+   "destinoId": "doc-02c6255a3d",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-2252bd329b",
+   "destinoId": "doc-ca7941082e",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-75ec6a6bcb",
+   "destinoId": "doc-ca7941082e",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-739f536c0d",
+   "destinoId": "doc-69a943643c",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-739f536c0d",
+   "destinoId": "doc-472015f33b",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-739f536c0d",
+   "destinoId": "doc-ca7941082e",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-69a943643c",
+   "destinoId": "doc-472015f33b",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-69a943643c",
+   "destinoId": "doc-ca7941082e",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-69a943643c",
+   "destinoId": "doc-431e8ba156",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-69a943643c",
+   "destinoId": "doc-ff3072a79f",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-17f95800ce",
+   "destinoId": "doc-af05280176",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-9ad3f71b15",
+   "destinoId": "doc-2252bd329b",
+   "classe": "foco",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-9ad3f71b15",
+   "destinoId": "doc-38a6e57123",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-9ad3f71b15",
+   "destinoId": "doc-abd1e776d8",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-2252bd329b",
+   "destinoId": "doc-38a6e57123",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-2252bd329b",
+   "destinoId": "doc-abd1e776d8",
+   "classe": "ponte",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-38a6e57123",
+   "destinoId": "doc-abd1e776d8",
+   "classe": "fora",
+   "peso": 0.333333,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-27d1c11d63",
+   "destinoId": "doc-4b87185da7",
+   "classe": "foco",
+   "peso": 0.325,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-27d1c11d63",
+   "destinoId": "doc-166b64b43c",
+   "classe": "foco",
+   "peso": 0.325,
+   "nProducoes": 2,
+   "porTipoProducao": {
+    "artigo_periodico": 2,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-09fa999708",
+   "destinoId": "doc-e327b5fc5f",
+   "classe": "ponte",
+   "peso": 0.25,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2a50852d",
+   "destinoId": "doc-fc6826bf44",
+   "classe": "foco",
+   "peso": 0.25,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4b87185da7",
+   "destinoId": "doc-b79c01881a",
+   "classe": "foco",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-e89d9d4bbe",
+   "destinoId": "doc-01a6692606",
+   "classe": "ponte",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-496bb39870",
+   "destinoId": "doc-fc6826bf44",
+   "classe": "foco",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-abb329041a",
+   "destinoId": "doc-e327b5fc5f",
+   "classe": "ponte",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-c57a6c9796",
+   "destinoId": "doc-e327b5fc5f",
+   "classe": "ponte",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-e327b5fc5f",
+   "destinoId": "doc-8f89985df6",
+   "classe": "foco",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-496bb39870",
+   "destinoId": "doc-02c6255a3d",
+   "classe": "foco",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-496bb39870",
+   "destinoId": "doc-166b64b43c",
+   "classe": "foco",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-8321d8660a",
+   "destinoId": "doc-cb094619ae",
+   "classe": "ponte",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-cb094619ae",
+   "destinoId": "doc-07d0341786",
+   "classe": "ponte",
+   "peso": 0.2,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-3b5528f55a",
+   "destinoId": "doc-6e2a50852d",
+   "classe": "foco",
+   "peso": 0.166667,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-3b5528f55a",
+   "destinoId": "doc-824a09c06c",
+   "classe": "foco",
+   "peso": 0.166667,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-3b5528f55a",
+   "destinoId": "doc-01a6692606",
+   "classe": "ponte",
+   "peso": 0.166667,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2a50852d",
+   "destinoId": "doc-824a09c06c",
+   "classe": "foco",
+   "peso": 0.166667,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-824a09c06c",
+   "destinoId": "doc-01a6692606",
+   "classe": "ponte",
+   "peso": 0.166667,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-09fa999708",
+   "destinoId": "doc-c57a6c9796",
+   "classe": "fora",
+   "peso": 0.166667,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-cb094619ae",
+   "destinoId": "doc-d8362598f1",
+   "classe": "ponte",
+   "peso": 0.166667,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2f3a1bc5",
+   "destinoId": "doc-166b64b43c",
+   "classe": "ponte",
+   "peso": 0.15,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 0,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 1
+   }
+  },
+  {
+   "origemId": "doc-805b0dc599",
+   "destinoId": "doc-52c23960b8",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-e89d9d4bbe",
+   "destinoId": "doc-dfb3b4a3d8",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-fc6826bf44",
+   "destinoId": "doc-dfb3b4a3d8",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-01a6692606",
+   "destinoId": "doc-0cf466412e",
+   "classe": "fora",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-cb094619ae",
+   "destinoId": "doc-dfb3b4a3d8",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-cb094619ae",
+   "destinoId": "doc-8f89985df6",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-817647a07d",
+   "destinoId": "doc-dfb3b4a3d8",
+   "classe": "ponte",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-817647a07d",
+   "destinoId": "doc-8f89985df6",
+   "classe": "ponte",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-dfb3b4a3d8",
+   "destinoId": "doc-8f89985df6",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-dfb3b4a3d8",
+   "destinoId": "doc-431e8ba156",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-8f89985df6",
+   "destinoId": "doc-431e8ba156",
+   "classe": "foco",
+   "peso": 0.142857,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2a50852d",
+   "destinoId": "doc-d8362598f1",
+   "classe": "ponte",
+   "peso": 0.125,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-6e2a50852d",
+   "destinoId": "doc-e5468ff6ed",
+   "classe": "ponte",
+   "peso": 0.125,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4d70e92c10",
+   "destinoId": "doc-d90ac34150",
+   "classe": "fora",
+   "peso": 0.1,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4d70e92c10",
+   "destinoId": "doc-d8362598f1",
+   "classe": "fora",
+   "peso": 0.1,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4d70e92c10",
+   "destinoId": "doc-e5468ff6ed",
+   "classe": "fora",
+   "peso": 0.1,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  },
+  {
+   "origemId": "doc-4b87185da7",
+   "destinoId": "doc-6e2a50852d",
+   "classe": "foco",
+   "peso": 0.090909,
+   "nProducoes": 1,
+   "porTipoProducao": {
+    "artigo_periodico": 1,
+    "livro": 0,
+    "evento_completo": 0,
+    "capitulo": 0,
+    "outro": 0
+   }
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITULO__</title>
+<script>__VISJS__</script>
+<style>
+  :root { --bg:#fafafa; --fg:#222; --muted:#666; --panel:#fff; --line:#ddd; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#16181c; --fg:#e8e8e8; --muted:#9aa; --panel:#20232a; --line:#333; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.4 system-ui, sans-serif; background:var(--bg); color:var(--fg); display:flex; height:100vh; }
+  #side { width:300px; padding:16px; overflow:auto; border-right:1px solid var(--line); background:var(--panel); }
+  #net { flex:1; }
+  h1 { font-size:16px; margin:0 0 4px; }
+  .muted { color:var(--muted); font-size:12px; }
+  .leg { display:flex; align-items:center; gap:8px; margin:3px 0; cursor:pointer; user-select:none; }
+  .leg.off { opacity:.35; }
+  .sw { width:12px; height:12px; border-radius:50%; flex:none; }
+  code { font-size:12px; }
+  label { display:block; margin:8px 0; }
+  input[type=search]{ width:100%; padding:6px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); }
+  .warn { background:#fff3cd; color:#664d03; padding:8px; border-radius:6px; font-size:12px; margin:10px 0; }
+  @media (max-width:700px){ body{flex-direction:column} #side{width:100%;max-height:40vh} }
+</style>
+</head>
+<body>
+<div id="side">
+  <h1>__TITULO__</h1>
+  <div class="muted">Esboço · produções __ANOS__</div>
+  <div id="foco" class="muted" style="margin-top:8px"></div>
+  <div class="warn">⚠️ Dados de <b>OpenAlex</b> (substituto temporário do Lattes). Só publicações indexadas; casamento de nomes heurístico.</div>
+  <p><b>Peso:</b> <code>w = Σ α(tipo) / (n − 1)</code></p>
+  <div class="muted" id="alpha"></div>
+  <label><input type="checkbox" id="iso"> mostrar docentes sem aresta</label>
+  <label id="lblFora" style="display:none"><input type="checkbox" id="fora" checked> mostrar arestas entre docentes de fora do foco</label>
+  <label>Peso mínimo da aresta: <span id="minv">0</span>
+    <input type="range" id="min" min="0" max="2" step="0.05" value="0" style="width:100%"></label>
+  <input type="search" id="busca" placeholder="Buscar docente…">
+  <h3 style="font-size:14px;margin:14px 0 6px">Institutos (clique para filtrar)</h3>
+  <div id="legenda"></div>
+  <p class="muted" id="stats"></p>
+  <p class="muted">Tamanho do nó = força (soma dos pesos). Espessura da aresta = peso.</p>
+</div>
+<div id="net"></div>
+<script>
+const NODES = __NODES__, EDGES = __EDGES__, CORES = __CORES__, ALPHA = __ALPHA__;
+const FOCO_HTML = __FOCO_HTML__;
+document.getElementById('alpha').innerHTML = Object.entries(ALPHA).map(([k,v])=>`α(${k}) = ${v}`).join('<br>');
+const off = new Set();
+// 'inst' em vez de 'group': o vis-network aplica paleta própria a 'group' e sobrescreve as cores
+const nodes = new vis.DataSet(NODES.map(n => { const c = CORES[n.inst]||'#999'; const b = n.foco ? '#111' : c;
+  return {...n, borderWidth: n.foco ? 3 : 1, color:{background:c, border:b, highlight:{background:c, border:'#000'}, hover:{background:c, border:'#000'}}}; }));
+// classes de aresta (opcional): 'foco' (dentro do foco), 'ponte' (foco↔fora), 'fora' (fora↔fora)
+const COR_CLS = { foco:'rgba(60,60,60,.65)', ponte:'rgba(200,90,20,.55)', fora:'rgba(150,150,150,.18)' };
+const edges = new vis.DataSet(EDGES.map((e,i)=>({id:i,...e, ...(e.cls ? {color:{color:COR_CLS[e.cls], highlight:'#000'}} : {})})));
+const state = { iso:false, min:0, fora:true };
+const nodeView = new vis.DataView(nodes, { filter: n => !off.has(n.inst) && (state.iso || !n.isolado) });
+const edgeView = new vis.DataView(edges, { filter: e => e.value >= state.min && (state.fora || e.cls !== 'fora') });
+const net = new vis.Network(document.getElementById('net'), {nodes:nodeView, edges:edgeView}, {
+  nodes:{ shape:'dot', scaling:{min:4,max:40}, font:{size:0} },
+  edges:{ color:{color:'rgba(140,140,140,.35)', highlight:'#333'}, scaling:{min:0.5,max:10}, smooth:false },
+  layout:{ improvedLayout:false },
+  physics:{ solver:'forceAtlas2Based', forceAtlas2Based:{gravitationalConstant:-40, springLength:80}, stabilization:{iterations:300} },
+  interaction:{ hover:true, tooltipDelay:100 }
+});
+net.once('stabilizationIterationsDone', ()=> net.setOptions({physics:false}));
+const leg = document.getElementById('legenda');
+const cont = {}; NODES.forEach(n=>cont[n.inst]=(cont[n.inst]||0)+1);
+Object.keys(cont).sort().forEach(g=>{
+  const el = document.createElement('div'); el.className='leg';
+  el.innerHTML = `<span class="sw" style="background:${CORES[g]||'#999'}"></span>${g} <span class="muted">(${cont[g]})</span>`;
+  el.onclick = ()=>{ off.has(g)?off.delete(g):off.add(g); el.classList.toggle('off'); nodeView.refresh(); };
+  leg.appendChild(el);
+});
+if (EDGES.some(e => e.cls)) document.getElementById('lblFora').style.display = 'block';
+document.getElementById('fora').onchange = e => { state.fora = e.target.checked; edgeView.refresh(); };
+if (typeof FOCO_HTML !== 'undefined') document.getElementById('foco').innerHTML = FOCO_HTML;
+document.getElementById('iso').onchange = e => { state.iso = e.target.checked; nodeView.refresh(); };
+document.getElementById('min').oninput = e => { state.min = +e.target.value; document.getElementById('minv').textContent = state.min; edgeView.refresh(); };
+document.getElementById('busca').oninput = e => {
+  const q = e.target.value.trim().toLowerCase(); if (q.length < 3) return;
+  const n = NODES.find(n => n.label.toLowerCase().includes(q));
+  if (n) { net.selectNodes([n.id]); net.focus(n.id, {scale:1.5, animation:true}); }
+};
+const comAresta = NODES.filter(n=>!n.isolado).length;
+document.getElementById('stats').textContent = `${NODES.length} docentes · ${comAresta} com colaboração interna · ${EDGES.length} arestas`;
+</script>
+</body>
+</html>
