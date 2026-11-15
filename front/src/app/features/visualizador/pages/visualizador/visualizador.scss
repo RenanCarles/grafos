@@ -1,20 +1,49 @@
-:host { display: block; }
+:host {
+  display: block;
+  min-height: calc(100dvh - 64px - 48px);
+}
+
+app-estado-pagina {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
 
 .topo {
   display: flex;
+  flex: none;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 16px;
 }
 
-h1 { margin: 4px 0 0; font-size: 1.5rem; }
-.sub { margin: 4px 0 0; color: var(--viz-ink-2); }
+h1 {
+  margin: 4px 0 0;
+  font-size: 1.5rem;
+}
+.sub {
+  margin: 4px 0 0;
+  color: var(--viz-ink-2);
+}
 
-.conteudo { display: grid; gap: 24px; }
-.conteudo.com-painel { grid-template-columns: minmax(0, 1fr) 280px; align-items: start; }
+.conteudo {
+  display: grid;
+  flex: 1 1 auto;
+  gap: 24px;
+  min-height: 0;
+  min-width: 0;
+}
+.conteudo.com-painel {
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: stretch;
+}
 
 .painel {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
   padding: 16px;
   border: 1px solid var(--viz-grid);
   border-radius: 12px;
@@ -22,5 +51,7 @@ h1 { margin: 4px 0 0; font-size: 1.5rem; }
 }
 
 @media (max-width: 960px) {
-  .conteudo.com-painel { grid-template-columns: 1fr; }
+  .conteudo.com-painel {
+    grid-template-columns: 1fr;
+  }
 }

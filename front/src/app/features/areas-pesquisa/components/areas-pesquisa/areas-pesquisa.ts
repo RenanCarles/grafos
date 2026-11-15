@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
@@ -14,7 +22,9 @@ import { montarModeloAreas, type ModeloAreas } from '../../services/montar-model
 @Component({
   selector: 'app-areas-pesquisa',
   imports: [MatButtonToggleModule, NgxEchartsDirective, EstadoPagina],
-  providers: [provideEchartsCore({ echarts: () => import('../../echarts-setup').then((m) => m.echarts) })],
+  providers: [
+    provideEchartsCore({ echarts: () => import('../../echarts-setup').then((m) => m.echarts) }),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './areas-pesquisa.html',
   styleUrl: './areas-pesquisa.scss',
@@ -53,9 +63,12 @@ export class AreasPesquisa {
 
   protected readonly modelo = computed<ModeloAreas | null>(() => {
     const dados = this.ultimosDados();
-    return dados ? montarModeloAreas({ dados, config: this.config(), modo: this.tema.modo() }) : null;
+    return dados
+      ? montarModeloAreas({ dados, config: this.config(), modo: this.tema.modo() })
+      : null;
   });
   protected readonly vazio = computed(() => this.modelo()?.vazio === true);
+  protected readonly semAreas = computed(() => this.ultimosDados()?.areas.length === 0);
   protected readonly mostrarEstado = computed(() => this.estado() !== 'pronto' || this.vazio());
 
   protected recarregar(): void {

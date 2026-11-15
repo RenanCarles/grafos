@@ -1,5 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -10,7 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
-import { catchError, debounceTime, firstValueFrom, map, of } from 'rxjs';
+import { debounceTime, filter, firstValueFrom, map } from 'rxjs';
 import { CATALOGO_REPOSITORY, VISOES_REPOSITORY, type Catalogo } from '@app/core/repositorios';
 import { VisualizacaoVisao } from '@app/features/visualizador/components/visualizacao-visao/visualizacao-visao';
 import { EstadoPagina, type EstadoCarga } from '@app/shared/components/estado-pagina';
@@ -59,22 +67,39 @@ export class VisaoEditor {
   private readonly snackBar = inject(MatSnackBar);
 
   protected readonly form = criarFormulario(inject(NonNullableFormBuilder));
-  protected readonly catalogo = toSignal(
-    inject(CATALOGO_REPOSITORY)
-      .obterCatalogo()
-      .pipe(catchError(() => of<Catalogo>({ institutos: [], areas: [] }))),
-    { initialValue: { institutos: [], areas: [] } as Catalogo },
+  private readonly catalogoRepositorio = inject(CATALOGO_REPOSITORY);
+  private readonly catalogoRecurso = rxResource({
+    stream: () => this.catalogoRepositorio.obterCatalogo(),
+  });
+  protected readonly catalogo = computed<Catalogo>(() =>
+    this.catalogoRecurso.hasValue() ? this.catalogoRecurso.value() : { institutos: [], areas: [] },
   );
-  protected readonly estado = signal<EstadoCarga>('pronto');
-  protected readonly mensagemErro = signal('');
+  protected readonly semAreas = computed(() => this.catalogo().areas.length === 0);
+  private readonly estadoVisao = signal<EstadoCarga>('pronto');
+  private readonly erroVisao = signal('');
+  protected readonly estado = computed<EstadoCarga>(() => {
+    if (this.catalogoRecurso.error()) return 'erro';
+    if (this.catalogoRecurso.isLoading()) return 'carregando';
+    return this.estadoVisao();
+  });
+  protected readonly mensagemErro = computed(() =>
+    this.catalogoRecurso.error() ? mensagemDe(this.catalogoRecurso.error()) : this.erroVisao(),
+  );
   protected readonly salvando = signal(false);
 
   protected readonly tipo = toSignal(this.form.controls.tipo.valueChanges, {
     initialValue: this.form.controls.tipo.value,
   });
+  protected readonly formulaPeso = toSignal(
+    this.form.controls.filtros.controls.formulaPeso.valueChanges,
+    {
+      initialValue: this.form.controls.filtros.controls.formulaPeso.value,
+    },
+  );
   protected readonly previa = toSignal(
     this.form.valueChanges.pipe(
       debounceTime(250),
+      filter(() => this.form.controls.filtros.valid),
       map(() => formularioParaRascunho(this.form.getRawValue())),
     ),
     { initialValue: formularioParaRascunho(this.form.getRawValue()) },
@@ -96,12 +121,18 @@ export class VisaoEditor {
 
   constructor() {
     effect(() => {
+      const areas = this.form.controls.filtros.controls.areas;
+      if (this.semAreas()) areas.disable({ emitEvent: false });
+      else areas.enable({ emitEvent: false });
+    });
+    effect(() => {
       const id = this.id();
       if (id) void this.carregar(id);
     });
   }
 
   protected recarregar(): void {
+    this.catalogoRecurso.reload();
     const id = this.id();
     if (id) void this.carregar(id);
   }
@@ -129,13 +160,13 @@ export class VisaoEditor {
   }
 
   private async carregar(id: string): Promise<void> {
-    this.estado.set('carregando');
+    this.estadoVisao.set('carregando');
     try {
       aplicarVisaoNoFormulario(this.form, await firstValueFrom(this.repositorio.obter(id)));
-      this.estado.set('pronto');
+      this.estadoVisao.set('pronto');
     } catch (erro) {
-      this.mensagemErro.set(mensagemDe(erro));
-      this.estado.set('erro');
+      this.erroVisao.set(mensagemDe(erro));
+      this.estadoVisao.set('erro');
     }
   }
 }

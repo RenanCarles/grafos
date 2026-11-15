@@ -13,7 +13,7 @@ const montar = (sobrescrever: Partial<EntradaRede> = {}) =>
   montarModeloRede({
     rede: criarRedeFake(),
     catalogo: criarCatalogoFake(),
-    config: criarConfigRedePadrao(),
+    config: { ...criarConfigRedePadrao(), tiposRelacao: ['coautoria', 'orientacao', 'projeto'] },
     modo: 'claro',
     ...sobrescrever,
   });
@@ -27,6 +27,45 @@ describe('escalar', () => {
 });
 
 describe('montarModeloRede', () => {
+  it.each(['forca', 'intermediacaoPonderada'] as const)(
+    'dimensiona os nós por %s usando a métrica recalculada',
+    (campo) => {
+      const rede = criarRedeFake();
+      rede.nos.forEach((no, i) => (no[campo] = i / 10));
+      const modelo = montar({ rede, config: { ...criarConfigRedePadrao(), tamanhoPor: campo } });
+      expect(dado(noPorId(modelo, 'p1'), 'tamanho')).toBe(14);
+      expect(dado(noPorId(modelo, 'p5'), 'tamanho')).toBe(44);
+    },
+  );
+  it('usa as cores institucionais da API sem limitar a legenda a seis institutos', () => {
+    const catalogo = criarCatalogoFake();
+    for (let i = 3; i < 12; i++)
+      catalogo.institutos.push({
+        id: `i${i + 1}`,
+        sigla: `I${i + 1}`,
+        nome: 'Instituto',
+        cor: '#123456',
+      });
+    const rede = criarRedeFake();
+    rede.nos.push({ ...rede.nos[0], id: 'ultimo', institutoId: 'i12' });
+    const modelo = montar({ rede, catalogo });
+    expect(dado(noPorId(modelo, 'ultimo'), 'cor')).toBe('#123456');
+    expect(modelo.legenda.at(-1)).toEqual({ rotulo: 'I12', cor: '#123456', institutoId: 'i12' });
+  });
+  it('escala pesos fracionários e preserva ids únicos da rede agregada', () => {
+    const rede = criarRedeFake();
+    rede.arestas.forEach((a, i) => (a.peso = (i + 1) / 100));
+    const elementos = arestas(montar({ rede }));
+    expect(elementos.map((a) => dado(a, 'espessura'))).toEqual([1, 2, 3, 4]);
+    expect(new Set(elementos.map((a) => dado(a, 'id'))).size).toBe(elementos.length);
+  });
+
+  it('trata rede vazia e pesos iguais sem espessuras inválidas', () => {
+    expect(montar({ rede: { nos: [], arestas: [] } }).elementos).toEqual([]);
+    const rede = criarRedeFake();
+    rede.arestas.forEach((a) => (a.peso = 0.1));
+    expect(arestas(montar({ rede })).every((a) => dado(a, 'espessura') === 2.5)).toBe(true);
+  });
   it('cria um nó por pesquisador e uma aresta por relação', () => {
     const modelo = montar();
     expect(nos(modelo)).toHaveLength(5);
@@ -71,14 +110,14 @@ describe('montarModeloRede', () => {
     rede.nos[4].comunidade = 7;
     const modelo = montar({ rede, config: { ...criarConfigRedePadrao(), corPor: 'comunidade' } });
     expect(dado(noPorId(modelo, 'p5'), 'cor')).toBe(COR_OUTROS.claro);
-    expect(modelo.legenda.at(-1)).toEqual({ rotulo: 'Outros', cor: COR_OUTROS.claro });
+    expect(modelo.legenda.at(-1)).toEqual({ rotulo: 'Outros', cor: COR_OUTROS.claro, outros: true });
   });
 
   it('monta a legenda por instituto na ordem do catálogo', () => {
     expect(montar().legenda).toEqual([
-      { rotulo: 'IESTI', cor: corRede('claro', 0) },
-      { rotulo: 'IEM', cor: corRede('claro', 1) },
-      { rotulo: 'IMC', cor: corRede('claro', 2) },
+      { rotulo: 'IESTI', cor: corRede('claro', 0), institutoId: 'i1' },
+      { rotulo: 'IEM', cor: corRede('claro', 1), institutoId: 'i2' },
+      { rotulo: 'IMC', cor: corRede('claro', 2), institutoId: 'i3' },
     ]);
     const porComunidade = montar({ config: { ...criarConfigRedePadrao(), corPor: 'comunidade' } });
     expect(porComunidade.legenda.map((i) => i.rotulo)).toEqual(['Grupo 1', 'Grupo 2', 'Grupo 3']);
@@ -102,8 +141,29 @@ describe('montarModeloRede', () => {
 
   it('gera as linhas da tabela ordenadas por grau, com sigla e áreas', () => {
     const { linhas } = montar();
-    expect(linhas.map((l) => l.nome)).toEqual(['Ana Souza', 'Bruno Lima', 'Carla Dias', 'Diego Rocha', 'Elisa Pinto']);
-    expect(linhas[1]).toMatchObject({ instituto: 'IESTI', areas: 'Inteligência Artificial, Matemática Aplicada', grupo: 1 });
+    expect(linhas.map((l) => l.nome)).toEqual([
+      'Ana Souza',
+      'Bruno Lima',
+      'Carla Dias',
+      'Diego Rocha',
+      'Elisa Pinto',
+    ]);
+    expect(linhas[1]).toMatchObject({
+      instituto: 'IESTI',
+      areas: 'Inteligência Artificial, Matemática Aplicada',
+      grupo: 1,
+      vizinhosFora: 1,
+      institutosDoGrupo: 'IESTI',
+    });
+  });
+
+  it('mostra ausência de parceiros fora do instituto sem transformar isso em zero', () => {
+    const rede = criarRedeFake();
+    delete rede.nos[0].vizinhosFora;
+    delete rede.nos[0].institutosDoGrupo;
+    const linha = montar({ rede }).linhas.find((item) => item.id === 'p1');
+    expect(linha?.vizinhosFora).toBeNull();
+    expect(linha?.institutosDoGrupo).toBe('—');
   });
 
   it('diferencia os tipos de relação por estilo de linha', () => {

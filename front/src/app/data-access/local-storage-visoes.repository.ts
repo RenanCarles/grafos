@@ -1,12 +1,15 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { defer, of, type Observable } from 'rxjs';
 import type { VisoesRepository } from '@app/core/repositorios';
 import type { RascunhoVisao, Visao } from '@app/shared/models/visao';
-import { LATENCIA_MOCK, comLatencia } from './mock/latencia';
-import { criarVisoesIniciais } from './mock/visoes-iniciais';
+import { criarVisoesIniciais } from './visoes-iniciais';
 
-const CHAVE = 'mapa-colaboracao:visoes:v1';
+const CHAVE = 'mapa-colaboracao:visoes:reais:v1';
 const NAO_ENCONTRADA = 'Visão não encontrada.';
+
+function corrigirNome(visao: Visao): Visao {
+  return visao.nome === 'Comuidades' ? { ...visao, nome: 'Comunidades' } : visao;
+}
 
 function ehVisaoValida(item: unknown): item is Visao {
   if (typeof item !== 'object' || item === null) return false;
@@ -23,8 +26,6 @@ function ehVisaoValida(item: unknown): item is Visao {
 
 @Injectable()
 export class LocalStorageVisoesRepository implements VisoesRepository {
-  private readonly latencia = inject(LATENCIA_MOCK);
-
   listar(): Observable<Visao[]> {
     return this.executar(() => this.ler());
   }
@@ -36,7 +37,12 @@ export class LocalStorageVisoesRepository implements VisoesRepository {
   criar(rascunho: RascunhoVisao): Observable<Visao> {
     return this.executar(() => {
       const agora = new Date().toISOString();
-      const nova: Visao = { ...structuredClone(rascunho), id: crypto.randomUUID(), criadoEm: agora, atualizadoEm: agora };
+      const nova: Visao = {
+        ...structuredClone(rascunho),
+        id: crypto.randomUUID(),
+        criadoEm: agora,
+        atualizadoEm: agora,
+      };
       this.gravar([...this.ler(), nova]);
       return nova;
     });
@@ -83,7 +89,7 @@ export class LocalStorageVisoesRepository implements VisoesRepository {
   }
 
   private executar<T>(operacao: () => T): Observable<T> {
-    return defer(() => of(operacao())).pipe(comLatencia(this.latencia));
+    return defer(() => of(operacao()));
   }
 
   private buscar(visoes: Visao[], id: string): Visao {
@@ -98,7 +104,10 @@ export class LocalStorageVisoesRepository implements VisoesRepository {
     try {
       const dados: unknown = JSON.parse(bruto);
       if (!Array.isArray(dados)) return this.reiniciar(bruto);
-      return dados.filter(ehVisaoValida);
+      const lidas = dados.filter(ehVisaoValida);
+      const visoes = lidas.map(corrigirNome);
+      if (visoes.some((visao, indice) => visao.nome !== lidas[indice].nome)) this.gravar(visoes);
+      return visoes;
     } catch {
       return this.reiniciar(bruto);
     }

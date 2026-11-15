@@ -9,7 +9,16 @@ import { TemaService } from './tema.service';
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatToolbarModule, MatSidenavModule, MatListModule, MatIconModule, MatButtonModule],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <mat-toolbar class="barra">
@@ -30,7 +39,13 @@ import { TemaService } from './tema.service';
     <mat-sidenav-container class="container">
       <mat-sidenav #menu mode="side" opened class="menu">
         <mat-nav-list>
-          <a mat-list-item routerLink="/visoes" routerLinkActive #rla="routerLinkActive" [activated]="rla.isActive">
+          <a
+            mat-list-item
+            routerLink="/visoes"
+            routerLinkActive
+            #rla="routerLinkActive"
+            [activated]="rla.isActive"
+          >
             <mat-icon matListItemIcon>dashboard_customize</mat-icon>
             <span matListItemTitle>Visões</span>
           </a>
@@ -42,13 +57,37 @@ import { TemaService } from './tema.service';
     </mat-sidenav-container>
   `,
   styles: `
-    :host { display: flex; flex-direction: column; height: 100dvh; }
-    .barra { flex: none; border-bottom: 1px solid var(--viz-grid); background: var(--viz-surface); }
-    .titulo { margin-left: 8px; font-weight: 600; }
-    .espaco { flex: 1; }
-    .container { flex: 1; background: var(--viz-page); }
-    .menu { width: 220px; background: var(--viz-surface); border-right: 1px solid var(--viz-grid); }
-    .conteudo { padding: 24px; }
+    :host {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+    }
+    .barra {
+      flex: none;
+      border-bottom: 1px solid var(--viz-grid);
+      background: var(--viz-surface);
+    }
+    .titulo {
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .espaco {
+      flex: 1;
+    }
+    .container {
+      flex: 1;
+      min-height: 0;
+      background: var(--viz-page);
+    }
+    .menu {
+      width: 220px;
+      background: var(--viz-surface);
+      border-right: 1px solid var(--viz-grid);
+    }
+    .conteudo {
+      box-sizing: border-box;
+      padding: 24px;
+    }
   `,
 })
 export class Shell {

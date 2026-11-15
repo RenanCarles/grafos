@@ -1,16 +1,30 @@
-:host { display: block; }
+:host {
+  display: block;
+}
 
-.topo h1 { margin: 0 0 16px; font-size: 1.5rem; }
+.topo h1 {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+}
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(360px, 540px) 1fr;
+  // O canvas não pode definir a largura mínima da coluna da prévia.
+  grid-template-columns: minmax(360px, 540px) minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
 
-.formulario { display: grid; gap: 4px; }
-.formulario section { display: grid; gap: 4px; margin-bottom: 8px; }
+.formulario {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.formulario section {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 8px;
+}
 
 .formulario h2,
 .previa h2 {
@@ -20,21 +34,53 @@
   color: var(--viz-ink-2);
 }
 
-.linha { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.acoes { display: flex; justify-content: flex-end; gap: 8px; }
-.erro { margin: 0; color: var(--mat-sys-error); }
+.linha {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.erro {
+  margin: 0;
+  color: var(--mat-sys-error);
+}
 
 .previa {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  box-sizing: border-box;
   position: sticky;
   top: 0;
-  min-height: 480px;
+  height: calc(100dvh - 64px - 48px);
+  max-height: calc(100dvh - 64px - 48px);
+  overflow: auto;
   padding: 16px;
   border: 1px solid var(--viz-grid);
   border-radius: 12px;
   background: var(--viz-surface);
 }
 
+.previa app-visualizacao-visao {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
 @media (max-width: 960px) {
-  .layout { grid-template-columns: 1fr; }
-  .linha { grid-template-columns: 1fr; }
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .linha {
+    grid-template-columns: 1fr;
+  }
+  .previa {
+    position: static;
+    height: auto;
+    max-height: none;
+  }
 }

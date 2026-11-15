@@ -4,15 +4,20 @@ import {
   CATALOGO_REPOSITORY,
   REDE_REPOSITORY,
   VISOES_REPOSITORY,
+  METADADOS_REPOSITORY,
 } from '@app/core/repositorios';
-import { LocalStorageVisoesRepository } from './local-storage-visoes.repository';
-import { MockAreasRepository, MockCatalogoRepository, MockRedeRepository } from './mock/repositorios-mock';
+import { AreasHttpRepository } from './http/areas-http.repository';
+import { CatalogoHttpRepository } from './http/catalogo-http.repository';
+import { MetadadosHttpRepository } from './http/metadados-http.repository';
+import { RedeHttpRepository } from './http/rede-http.repository';
+import { VisoesHttpRepository } from './http/visoes-http.repository';
 
 export function provideDados(): Provider[] {
   return [
-    { provide: CATALOGO_REPOSITORY, useClass: MockCatalogoRepository },
-    { provide: REDE_REPOSITORY, useClass: MockRedeRepository },
-    { provide: AREAS_REPOSITORY, useClass: MockAreasRepository },
-    { provide: VISOES_REPOSITORY, useClass: LocalStorageVisoesRepository },
+    { provide: CATALOGO_REPOSITORY, useClass: CatalogoHttpRepository },
+    { provide: REDE_REPOSITORY, useClass: RedeHttpRepository },
+    { provide: AREAS_REPOSITORY, useClass: AreasHttpRepository },
+    { provide: METADADOS_REPOSITORY, useClass: MetadadosHttpRepository },
+    { provide: VISOES_REPOSITORY, useClass: VisoesHttpRepository },
   ];
 }

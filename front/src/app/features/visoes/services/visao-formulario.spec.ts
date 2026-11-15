@@ -10,6 +10,53 @@ import {
 const novoFormulario = () => criarFormulario(new FormBuilder().nonNullable);
 
 describe('formulário da visão', () => {
+  it('valida os parâmetros temporais somente quando Zanoli está selecionado', () => {
+    const filtros = novoFormulario().controls.filtros;
+    filtros.patchValue({ formulaPeso: 'zanoli', lambdaTemporal: 0, anoReferencia: 2026 });
+    expect(filtros.valid).toBe(true);
+    filtros.patchValue({ lambdaTemporal: -0.1 });
+    expect(filtros.hasError('lambdaInvalido')).toBe(true);
+    filtros.patchValue({ lambdaTemporal: 0.1, anoReferencia: 2024 });
+    expect(filtros.hasError('referenciaInvalida')).toBe(true);
+    filtros.patchValue({ anoReferencia: 2026.5 });
+    expect(filtros.invalid).toBe(true);
+    filtros.patchValue({ formulaPeso: 'reimberg' });
+    expect(filtros.valid).toBe(true);
+  });
+
+  it('carrega visões antigas com Reimberg e valores temporais padrão', () => {
+    const form = novoFormulario();
+    const antiga = criarVisaoRedeFake();
+    delete antiga.filtros.formulaPeso;
+    delete antiga.filtros.lambdaTemporal;
+    delete antiga.filtros.anoReferencia;
+    aplicarVisaoNoFormulario(form, antiga);
+    expect(form.controls.filtros.getRawValue()).toMatchObject({
+      formulaPeso: 'reimberg',
+      lambdaTemporal: 0.1,
+      anoReferencia: 2026,
+    });
+  });
+  it('aceita pesos fracionários e altos, rejeitando negativos', () => {
+    const form = novoFormulario();
+    const peso = form.controls.filtros.controls.pesoMinimo;
+    for (const valor of [0, 0.1, 0.007, 10]) {
+      peso.setValue(valor);
+      expect(peso.valid).toBe(true);
+    }
+    peso.setValue(-0.1);
+    expect(peso.invalid).toBe(true);
+  });
+
+  it('rejeita anos fracionários e fora da coleta', () => {
+    const ano = novoFormulario().controls.filtros.controls.anoInicio;
+    for (const valor of [2020, 2026, 2021.5]) {
+      ano.setValue(valor);
+      expect(ano.invalid).toBe(true);
+    }
+    ano.setValue(2021);
+    expect(ano.valid).toBe(true);
+  });
   it('exige nome com pelo menos 3 caracteres', () => {
     const form = novoFormulario();
     expect(formularioValido(form)).toBe(false);
@@ -55,13 +102,24 @@ describe('formulário da visão', () => {
     form.controls.areas.patchValue({ grafico: 'treemap', topN: 5 });
     const rascunho = formularioParaRascunho(form.getRawValue());
     expect(rascunho.tipo).toBe('areas');
-    expect(rascunho.config).toEqual({ grafico: 'treemap', agruparPor: 'area', topN: 5, destacarAreasPonte: true });
+    expect(rascunho.config).toEqual({
+      grafico: 'treemap',
+      agruparPor: 'area',
+      topN: 5,
+      destacarAreasPonte: true,
+    });
   });
 
   it('aplicar uma visão no formulário e voltar a rascunho preserva tudo (rede)', () => {
     const { id, criadoEm, atualizadoEm, ...esperado } = criarVisaoRedeFake({
       nome: 'Pontes',
-      config: { layout: 'circulo', corPor: 'comunidade', tamanhoPor: 'intermediacao', tiposRelacao: ['coautoria'], mostrarRotulos: true },
+      config: {
+        layout: 'circulo',
+        corPor: 'comunidade',
+        tamanhoPor: 'intermediacao',
+        tiposRelacao: ['coautoria'],
+        mostrarRotulos: true,
+      },
     });
     const form = novoFormulario();
     aplicarVisaoNoFormulario(form, criarVisaoRedeFake({ nome: 'Pontes', config: esperado.config }));

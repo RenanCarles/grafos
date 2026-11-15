@@ -1,5 +1,17 @@
 <div class="barra">
-  <mat-button-toggle-group [value]="exibicao()" (change)="exibicao.set($event.value)" aria-label="Forma de exibição">
+  @if (recarregando()) {
+    <p role="status">Recalculando rede…</p>
+  }
+  @if (estado() === 'pronto') {
+    <p role="status">
+      {{ totalPesquisadores() }} pesquisadores · {{ totalPares() }} pares de coautoria no recorte
+    </p>
+  }
+  <mat-button-toggle-group
+    [value]="exibicao()"
+    (change)="exibicao.set($event.value)"
+    aria-label="Forma de exibição"
+  >
     <mat-button-toggle value="grafico">Grafo</mat-button-toggle>
     <mat-button-toggle value="tabela">Tabela</mat-button-toggle>
   </mat-button-toggle-group>
@@ -15,28 +27,34 @@
     [class.recarregando]="recarregando()"
   ></div>
 
-  @if (exibicao() === 'tabela' && modelo(); as m) {
+  @if (exibicao() === 'tabela' && modelo()) {
     <table class="tabela">
-      <caption class="sr-only">Pesquisadores da rede de colaboração</caption>
+      <caption class="sr-only">
+        Pesquisadores da rede de colaboração
+      </caption>
       <thead>
         <tr>
-          <th scope="col">Pesquisador</th>
-          <th scope="col">Instituto</th>
-          <th scope="col">Áreas</th>
-          <th scope="col" class="num">Grau</th>
-          <th scope="col" class="num">Intermediação</th>
-          <th scope="col" class="num">Grupo</th>
+          @for (coluna of colunas; track coluna.id) {
+            <th scope="col" [class.num]="coluna.numerica" [attr.aria-sort]="ordemDe(coluna.id)">
+              <button type="button" [attr.title]="coluna.titulo" (click)="ordenar(coluna.id)">
+                {{ coluna.rotulo }}
+              </button>
+            </th>
+          }
         </tr>
       </thead>
       <tbody>
-        @for (linha of m.linhas; track linha.id) {
-          <tr>
+        @for (linha of linhas(); track linha.id) {
+          <tr [class.selecionada]="pessoa()?.id === linha.id" (click)="selecionarPessoa(linha.id)">
             <td>{{ linha.nome }}</td>
             <td>{{ linha.instituto }}</td>
             <td>{{ linha.areas }}</td>
             <td class="num">{{ linha.grau }}</td>
+            <td class="num">{{ linha.forca === null ? '—' : linha.forca.toFixed(3) }}</td>
             <td class="num">{{ linha.intermediacao.toFixed(3) }}</td>
             <td class="num">{{ linha.grupo }}</td>
+            <td class="num">{{ linha.vizinhosFora === null ? '—' : linha.vizinhosFora }}</td>
+            <td>{{ linha.institutosDoGrupo }}</td>
           </tr>
         }
       </tbody>
@@ -44,7 +62,9 @@
   }
 
   @if (tooltip(); as t) {
-    <div class="tooltip-no" role="tooltip" [style.left.px]="t.x + 12" [style.top.px]="t.y + 12">{{ t.texto }}</div>
+    <div class="tooltip-no" role="tooltip" [style.left.px]="t.x + 12" [style.top.px]="t.y + 12">
+      {{ t.texto }}
+    </div>
   }
 
   @if (mostrarEstado()) {
@@ -59,13 +79,129 @@
   }
 </div>
 
+@if (pessoa(); as n) {
+  <section class="ficha" aria-live="polite" aria-label="Pesquisador selecionado">
+    <div class="ficha-topo">
+      <h2>{{ n.nome }}</h2>
+      <button type="button" (click)="limparFoco()">Fechar</button>
+    </div>
+    <p class="subtitulo">{{ siglaInstituto(n) }} · Grupo {{ n.comunidade + 1 }}</p>
+    <dl>
+      <dt>Instituto</dt>
+      <dd>{{ nomeInstituto(n) }}</dd>
+      <dt>Parceiros (grau)</dt>
+      <dd>{{ n.grau }}</dd>
+      <dt>Força</dt>
+      <dd>{{ n.forca === undefined ? '—' : n.forca.toFixed(3) }}</dd>
+      <dt>Intermediação</dt>
+      <dd>{{ n.intermediacao.toFixed(3) }}</dd>
+      <dt>Parceiros em outro instituto</dt>
+      <dd>{{ parceirosFora(n) }}</dd>
+      <dt>Institutos neste grupo</dt>
+      <dd>{{ institutosDoGrupo(n) }}</dd>
+    </dl>
+    <p>{{ textoGrupo(n) }}</p>
+    <p class="dica">{{ significadoComunidade }}</p>
+    <button type="button" (click)="abrirComunidade(n.comunidade)">
+      Ver o grupo {{ n.comunidade + 1 }}
+    </button>
+  </section>
+} @else if (grupoAberto(); as grupo) {
+  <section class="ficha" aria-live="polite" aria-label="Comunidade selecionada">
+    <div class="ficha-topo">
+      <h2>Grupo {{ grupo.numero }}</h2>
+      <button type="button" (click)="limparFoco()">Fechar</button>
+    </div>
+    <p>{{ descrever(grupo) }}</p>
+    <p class="dica">{{ significadoComunidade }}</p>
+  </section>
+} @else if (institutoAberto(); as instituto) {
+  <section class="ficha" aria-live="polite" aria-label="Instituto selecionado">
+    <div class="ficha-topo">
+      <h2>{{ instituto.sigla }}</h2>
+      <button type="button" (click)="limparFoco()">Fechar</button>
+    </div>
+    <p>
+      {{ instituto.nome }}: {{ instituto.pessoas }}
+      {{ instituto.pessoas === 1 ? 'docente' : 'docentes' }} neste recorte. A cor identifica o
+      instituto de lotação. Uma comunidade de colaboração pode reunir institutos diferentes.
+    </p>
+  </section>
+} @else if (foco()?.tipo === 'outros') {
+  <section class="ficha" aria-live="polite" aria-label="Outras comunidades">
+    <div class="ficha-topo">
+      <h2>Outros</h2>
+      <button type="button" (click)="limparFoco()">Fechar</button>
+    </div>
+    <p>
+      A paleta junta nestas cores as comunidades que passam dos seis tons. O agrupamento é só
+      visual: cada grupo continua separado.
+    </p>
+    @if (gruposOutros().length === 0) {
+      <p class="dica">Nenhum desses grupos tem mais de uma pessoa neste recorte.</p>
+    }
+  </section>
+}
+
 @if (modelo(); as m) {
   @if (exibicao() === 'grafico') {
     <ul class="legenda" aria-label="Legenda">
       @for (item of m.legenda; track item.rotulo) {
-        <li><span class="cor" [style.background]="item.cor"></span>{{ item.rotulo }}</li>
+        <li>
+          <button
+            type="button"
+            [attr.aria-pressed]="legendaPressionada(item)"
+            (click)="clicarLegenda(item)"
+          >
+            <span class="cor" [style.background]="item.cor"></span>{{ item.rotulo }}
+          </button>
+        </li>
       }
     </ul>
-    <p class="dica">Linha contínua: coautoria · pontilhada: orientação · tracejada: projeto</p>
+    <p class="dica">
+      Linha contínua: coautoria. A espessura representa o peso relativo no recorte. Clique em um
+      vértice para ver quem é. Clique na legenda para destacar o instituto ou a comunidade.
+    </p>
   }
+
+  <section class="comunidades" aria-label="Comunidades de colaboração">
+    <h2>Comunidades</h2>
+    <p class="dica">
+      Louvain na coautoria de 2021–2025. O número não é um instituto nem uma área de pesquisa. O
+      filtro não refaz o grupo.
+    </p>
+    @if (comunidades().grupos.length > 0) {
+      <ul>
+        @for (grupo of comunidades().grupos; track grupo.indice) {
+          <li>
+            <button
+              type="button"
+              [attr.aria-pressed]="comunidadePressionada(grupo.indice)"
+              (click)="abrirComunidade(grupo.indice)"
+            >
+              Grupo {{ grupo.numero }} · {{ grupo.pessoas }}
+              {{ grupo.pessoas === 1 ? 'pessoa' : 'pessoas' }} · {{ grupo.institutos.join(', ') }}
+            </button>
+          </li>
+        }
+      </ul>
+    }
+    @if (comunidades().isolados > 0) {
+      <p class="dica">
+        {{ comunidades().isolados }}
+        {{ comunidades().isolados === 1 ? 'docente fica' : 'docentes ficam' }} em grupo de uma
+        pessoa, sem coautoria com outro docente nesta coleta. Isso não prova ausência de colaboração
+        fora das publicações indexadas.
+      </p>
+    }
+  </section>
+}
+<p class="dica">
+  Grau, força, intermediação, comunidades, parceiros em outro instituto e institutos do grupo
+  referem-se à rede completa de 2021–2025, com a fórmula escolhida; não são recalculados pelos
+  filtros. Ao selecionar institutos, são mantidas somente relações entre os pesquisadores
+  selecionados.
+</p>
+@if (leituraGrupos(); as leitura) {
+  <p class="dica">{{ leitura }}</p>
 }

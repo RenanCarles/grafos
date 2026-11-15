@@ -62,7 +62,7 @@ describe('Visualizador', () => {
 
   it('atualiza o painel de detalhes quando um pesquisador é selecionado', async () => {
     await abrir('v-rede');
-    expect(raiz().textContent).toContain('Selecione um pesquisador no grafo');
+    expect(raiz().textContent).toContain('Selecione um pesquisador no grafo ou na tabela');
     const falsa = fixture.debugElement.query(By.directive(VisualizacaoFalsa)).injector.get(VisualizacaoFalsa);
     falsa.noSelecionado.emit(criarRedeFake().nos[0]);
     await fixture.whenStable();

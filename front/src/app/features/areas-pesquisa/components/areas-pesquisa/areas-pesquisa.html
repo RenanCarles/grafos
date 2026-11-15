@@ -1,5 +1,15 @@
+@if (semAreas()) {
+  <p role="status">
+    Áreas e temas não estão disponíveis nesta coleta. Para consultar a distribuição de docentes,
+    edite a visão e selecione Barras com agrupamento por Instituto.
+  </p>
+}
 <div class="barra">
-  <mat-button-toggle-group [value]="exibicao()" (change)="exibicao.set($event.value)" aria-label="Forma de exibição">
+  <mat-button-toggle-group
+    [value]="exibicao()"
+    (change)="exibicao.set($event.value)"
+    aria-label="Forma de exibição"
+  >
     <mat-button-toggle value="grafico">Gráfico</mat-button-toggle>
     <mat-button-toggle value="tabela">Tabela</mat-button-toggle>
   </mat-button-toggle-group>
@@ -21,7 +31,9 @@
 
       @if (exibicao() === 'tabela') {
         <table class="tabela">
-          <caption class="sr-only">Áreas e temas de pesquisa</caption>
+          <caption class="sr-only">
+            Áreas e temas de pesquisa
+          </caption>
           <thead>
             <tr>
               <th scope="col">Item</th>
@@ -53,7 +65,11 @@
       [estado]="estado()"
       [vazio]="vazio()"
       [mensagemErro]="mensagemErro()"
-      mensagemVazio="Nenhuma área com pesquisadores nos filtros atuais."
+      [mensagemVazio]="
+        semAreas()
+          ? 'Áreas não disponíveis nesta coleta.'
+          : 'Nenhuma área com pesquisadores nos filtros atuais.'
+      "
       (tentarNovamente)="recarregar()"
     />
   }

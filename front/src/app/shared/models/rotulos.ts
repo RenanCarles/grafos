@@ -27,6 +27,8 @@ export const ROTULO_COR_POR: Record<CorPor, string> = {
 export const ROTULO_TAMANHO_POR: Record<TamanhoPor, string> = {
   grau: 'Grau',
   intermediacao: 'Intermediação',
+  forca: 'Força (soma dos pesos)',
+  intermediacaoPonderada: 'Intermediação ponderada',
   fixo: 'Fixo',
 };
 

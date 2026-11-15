@@ -4,7 +4,7 @@ import { of, throwError } from 'rxjs';
 import { REDE_REPOSITORY, type RedeRepository } from '@app/core/repositorios';
 import type { NoRede } from '@app/shared/models/dominio';
 import { criarConfigRedePadrao, criarFiltrosPadrao } from '@app/shared/models/visao';
-import { provedoresDadosFake } from '@app/shared/testing/fixtures';
+import { criarRedeFake, provedoresDadosFake } from '@app/shared/testing/fixtures';
 import { FABRICA_CYTOSCAPE, type FabricaCytoscape } from '../../services/fabrica-cytoscape';
 import { RedeColaboracao } from './rede-colaboracao';
 
@@ -32,14 +32,17 @@ describe('RedeColaboracao', () => {
     instancia = undefined;
     await TestBed.configureTestingModule({
       imports: [RedeColaboracao],
-      providers: [...provedoresDadosFake(), { provide: FABRICA_CYTOSCAPE, useValue: fabricaHeadless }],
+      providers: [
+        ...provedoresDadosFake(),
+        { provide: FABRICA_CYTOSCAPE, useValue: fabricaHeadless },
+      ],
     }).compileComponents();
   });
 
   it('cria o grafo com os pesquisadores e as relações', async () => {
     await montar();
     expect(instancia?.nodes()).toHaveLength(5);
-    expect(instancia?.edges()).toHaveLength(4);
+    expect(instancia?.edges()).toHaveLength(2);
   });
 
   it('mostra a legenda por instituto', async () => {
@@ -48,6 +51,21 @@ describe('RedeColaboracao', () => {
     expect(legenda).toContain('IESTI');
     expect(legenda).toContain('IEM');
     expect(legenda).toContain('IMC');
+  });
+
+  it('apresenta o peso de uma aresta no tooltip', async () => {
+    await montar();
+    const aresta = instancia!.edges().first();
+    aresta.emit('mouseover');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(raiz().querySelector('[role="tooltip"]')?.textContent).toContain(
+      `Peso: ${aresta.data('peso')}`,
+    );
+    aresta.emit('mouseout');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(raiz().querySelector('[role="tooltip"]')).toBeNull();
   });
 
   it('emite o pesquisador tocado e null ao tocar no fundo', async () => {
@@ -64,11 +82,57 @@ describe('RedeColaboracao', () => {
     instancia!.$id('p1').emit('mouseover');
     await fixture.whenStable();
     fixture.detectChanges();
-    expect(raiz().querySelector('[role="tooltip"]')?.textContent).toContain('Ana Souza · 3 parceiros');
+    expect(raiz().querySelector('[role="tooltip"]')?.textContent).toContain(
+      'Ana Souza · IESTI · Grupo 1 · 3 parceiros',
+    );
     instancia!.$id('p1').emit('mouseout');
     await fixture.whenStable();
     fixture.detectChanges();
     expect(raiz().querySelector('[role="tooltip"]')).toBeNull();
+  });
+
+  it('mostra quem é o vértice clicado e destaca a vizinhança', async () => {
+    await montar();
+    instancia!.$id('p1').emit('tap');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const ficha = raiz().querySelector('.ficha')?.textContent ?? '';
+    expect(ficha).toContain('Ana Souza');
+    expect(ficha).toContain('Sistemas e Tecnologia da Informação');
+    expect(ficha).toContain('1 de 3');
+    expect(ficha).toContain('Louvain');
+    expect(instancia!.$id('p1').hasClass('destaque')).toBe(true);
+    expect(instancia!.$id('p2').hasClass('apagado')).toBe(false);
+    expect(instancia!.$id('p5').hasClass('apagado')).toBe(true);
+  });
+
+  it('explica a comunidade clicada e destaca os membros do grupo', async () => {
+    await montar();
+    const botao = [...raiz().querySelectorAll('.comunidades button')].find((item) =>
+      item.textContent?.includes('Grupo 1'),
+    ) as HTMLButtonElement;
+    botao.click();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const ficha = raiz().querySelector('.ficha')?.textContent ?? '';
+    expect(ficha).toContain('2 pessoas neste recorte');
+    expect(ficha).toContain('Institutos na rede completa: IESTI');
+    expect(ficha).toContain('Louvain');
+    expect(instancia!.$id('p1').hasClass('destaque')).toBe(true);
+    expect(instancia!.$id('p2').hasClass('destaque')).toBe(true);
+    expect(instancia!.$id('p3').hasClass('apagado')).toBe(true);
+  });
+
+  it('fecha a ficha ao clicar no fundo do grafo', async () => {
+    await montar();
+    instancia!.$id('p1').emit('tap');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    instancia!.emit('tap');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(raiz().querySelector('.ficha')).toBeNull();
+    expect(instancia!.$id('p1').hasClass('destaque')).toBe(false);
   });
 
   it('alterna para a tabela equivalente, ordenada por grau', async () => {
@@ -79,7 +143,33 @@ describe('RedeColaboracao', () => {
     const linhas = raiz().querySelectorAll('tbody tr');
     expect(linhas).toHaveLength(5);
     expect(linhas[0].textContent).toContain('Ana Souza');
+    expect(linhas[0].textContent).toContain('IESTI');
+    expect(raiz().textContent).toContain('1 deles reúne institutos diferentes');
     expect(raiz().querySelector('.grafo')?.hasAttribute('hidden')).toBe(true);
+  });
+
+  it('ordena a tabela pela força ao clicar no cabeçalho', async () => {
+    const rede = criarRedeFake();
+    rede.nos[0].forca = 1;
+    rede.nos[1].forca = 9;
+    rede.nos[2].forca = 4;
+    rede.nos[3].forca = 0;
+    rede.nos[4].forca = 0;
+    const repositorio: RedeRepository = { obterRede: () => of(rede) };
+    TestBed.overrideProvider(REDE_REPOSITORY, { useValue: repositorio });
+    await montar();
+    raiz().querySelector<HTMLButtonElement>('mat-button-toggle[value="tabela"] button')!.click();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const botaoForca = [...raiz().querySelectorAll('thead button')].find((botao) =>
+      botao.textContent?.includes('Força'),
+    ) as HTMLButtonElement;
+    botaoForca.click();
+    fixture.detectChanges();
+    const linhas = raiz().querySelectorAll('tbody tr');
+    expect(linhas[0].textContent).toContain('Bruno Lima');
+    expect(linhas[1].textContent).toContain('Carla Dias');
+    expect(botaoForca.closest('th')?.getAttribute('aria-sort')).toBe('descending');
   });
 
   it('mostra o erro do repositório com opção de tentar novamente', async () => {

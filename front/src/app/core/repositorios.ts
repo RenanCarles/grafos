@@ -1,7 +1,14 @@
 import { InjectionToken } from '@angular/core';
 import type { Observable } from 'rxjs';
-import type { Area, DadosAreas, Instituto, Rede } from '@app/shared/models/dominio';
+import type {
+  Area,
+  DadosAreas,
+  Instituto,
+  Rede,
+  MetadadosColeta,
+} from '@app/shared/models/dominio';
 import type { FiltrosVisao, RascunhoVisao, Visao } from '@app/shared/models/visao';
+import type { ConfiguracaoPeso } from '@app/shared/models/peso';
 
 export interface Catalogo {
   institutos: Instituto[];
@@ -19,6 +26,12 @@ export interface RedeRepository {
 export interface AreasRepository {
   obterAreas(filtros: FiltrosVisao): Observable<DadosAreas>;
 }
+
+export interface MetadadosRepository {
+  obterMetadados(configuracao?: ConfiguracaoPeso): Observable<MetadadosColeta>;
+}
+
+export const METADADOS_REPOSITORY = new InjectionToken<MetadadosRepository>('METADADOS_REPOSITORY');
 
 export interface VisoesRepository {
   listar(): Observable<Visao[]>;

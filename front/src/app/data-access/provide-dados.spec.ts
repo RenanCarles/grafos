@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 import {
   AREAS_REPOSITORY,
   CATALOGO_REPOSITORY,
@@ -9,7 +10,7 @@ import { provideDados } from './provide-dados';
 
 describe('provideDados', () => {
   it('registra os quatro repositórios', () => {
-    TestBed.configureTestingModule({ providers: [provideDados()] });
+    TestBed.configureTestingModule({ providers: [provideHttpClient(), provideDados()] });
     expect(TestBed.inject(CATALOGO_REPOSITORY).obterCatalogo).toBeTypeOf('function');
     expect(TestBed.inject(REDE_REPOSITORY).obterRede).toBeTypeOf('function');
     expect(TestBed.inject(AREAS_REPOSITORY).obterAreas).toBeTypeOf('function');

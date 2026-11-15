@@ -1,5 +1,6 @@
 import { Validators, type NonNullableFormBuilder, type ValidatorFn } from '@angular/forms';
 import type { TipoRelacao } from '@app/shared/models/dominio';
+import { ANO_REFERENCIA_PADRAO, LAMBDA_PADRAO, type FormulaPeso } from '@app/shared/models/peso';
 import {
   ANO_MAX,
   ANO_MIN,
@@ -10,6 +11,7 @@ import {
   type RascunhoVisao,
   type TamanhoPor,
   type TipoVisao,
+  criarFiltrosPadrao,
 } from '@app/shared/models/visao';
 
 export const periodoValido: ValidatorFn = (grupo) => {
@@ -18,8 +20,25 @@ export const periodoValido: ValidatorFn = (grupo) => {
   return inicio != null && fim != null && inicio > fim ? { periodoInvalido: true } : null;
 };
 
+export const parametrosPesoValidos: ValidatorFn = (grupo) => {
+  if (grupo.get('formulaPeso')?.value !== 'zanoli') return null;
+  const lambda = grupo.get('lambdaTemporal')?.value;
+  const referencia = grupo.get('anoReferencia')?.value;
+  if (!Number.isFinite(lambda) || lambda < 0 || lambda > 0.5) return { lambdaInvalido: true };
+  if (!Number.isInteger(referencia) || referencia < ANO_MAX || referencia > 2100)
+    return { referenciaInvalida: true };
+  return null;
+};
+
 export function criarFormulario(fb: NonNullableFormBuilder) {
-  const limitesAno = [Validators.required, Validators.min(ANO_MIN), Validators.max(ANO_MAX)];
+  const anoInteiro: ValidatorFn = (controle) =>
+    Number.isInteger(controle.value) ? null : { anoInteiro: true };
+  const limitesAno = [
+    Validators.required,
+    Validators.min(ANO_MIN),
+    Validators.max(ANO_MAX),
+    anoInteiro,
+  ];
   return fb.group({
     nome: fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
     descricao: fb.control('', [Validators.maxLength(280)]),
@@ -30,15 +49,21 @@ export function criarFormulario(fb: NonNullableFormBuilder) {
         areas: fb.control<string[]>([]),
         anoInicio: fb.control(ANO_MIN, limitesAno),
         anoFim: fb.control(ANO_MAX, limitesAno),
-        pesoMinimo: fb.control(1, [Validators.required, Validators.min(1), Validators.max(6)]),
+        pesoMinimo: fb.control(0, [Validators.required, Validators.min(0)]),
+        formulaPeso: fb.control<FormulaPeso>('reimberg'),
+        lambdaTemporal: fb.control(LAMBDA_PADRAO),
+        anoReferencia: fb.control(ANO_REFERENCIA_PADRAO),
       },
-      { validators: [periodoValido] },
+      { validators: [periodoValido, parametrosPesoValidos] },
     ),
     rede: fb.group({
       layout: fb.control<LayoutRede>('forca'),
       corPor: fb.control<CorPor>('instituto'),
       tamanhoPor: fb.control<TamanhoPor>('grau'),
-      tiposRelacao: fb.control<TipoRelacao[]>(['coautoria', 'orientacao', 'projeto'], [Validators.required, Validators.minLength(1)]),
+      tiposRelacao: fb.control<TipoRelacao[]>(
+        ['coautoria'],
+        [Validators.required, Validators.minLength(1)],
+      ),
       mostrarRotulos: fb.control(false),
     }),
     areas: fb.group({
@@ -76,7 +101,11 @@ export function formularioParaRascunho(valor: ValorFormulario): RascunhoVisao {
     },
   };
   return valor.tipo === 'rede'
-    ? { ...base, tipo: 'rede', config: { ...valor.rede, tiposRelacao: [...valor.rede.tiposRelacao] } }
+    ? {
+        ...base,
+        tipo: 'rede',
+        config: { ...valor.rede, tiposRelacao: [...valor.rede.tiposRelacao] },
+      }
     : { ...base, tipo: 'areas', config: { ...valor.areas } };
 }
 
@@ -85,7 +114,7 @@ export function aplicarVisaoNoFormulario(form: FormularioVisao, visao: RascunhoV
     nome: visao.nome,
     descricao: visao.descricao,
     tipo: visao.tipo,
-    filtros: visao.filtros,
+    filtros: { ...criarFiltrosPadrao(), ...visao.filtros },
   });
   if (visao.tipo === 'rede') form.controls.rede.patchValue(visao.config);
   else form.controls.areas.patchValue(visao.config);

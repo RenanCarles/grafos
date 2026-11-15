@@ -1,16 +1,17 @@
 import type { TipoRelacao } from './dominio';
+import { ANO_REFERENCIA_PADRAO, LAMBDA_PADRAO, type ConfiguracaoPeso } from './peso';
 
-export const ANO_MIN = 2018;
+export const ANO_MIN = 2021;
 export const ANO_MAX = 2025;
 
 export type TipoVisao = 'rede' | 'areas';
 export type LayoutRede = 'forca' | 'concentrico' | 'circulo';
 export type CorPor = 'instituto' | 'area' | 'comunidade';
-export type TamanhoPor = 'grau' | 'intermediacao' | 'fixo';
+export type TamanhoPor = 'grau' | 'intermediacao' | 'forca' | 'intermediacaoPonderada' | 'fixo';
 export type GraficoAreas = 'barras' | 'treemap' | 'sunburst';
 export type AgruparPor = 'area' | 'instituto';
 
-export interface FiltrosVisao {
+export interface FiltrosVisao extends ConfiguracaoPeso {
   institutos: string[];
   areas: string[];
   anoInicio: number;
@@ -60,7 +61,16 @@ type SemMeta<T> = T extends unknown ? Omit<T, 'id' | 'criadoEm' | 'atualizadoEm'
 export type RascunhoVisao = SemMeta<Visao>;
 
 export function criarFiltrosPadrao(): FiltrosVisao {
-  return { institutos: [], areas: [], anoInicio: ANO_MIN, anoFim: ANO_MAX, pesoMinimo: 1 };
+  return {
+    institutos: [],
+    areas: [],
+    anoInicio: ANO_MIN,
+    anoFim: ANO_MAX,
+    pesoMinimo: 0,
+    formulaPeso: 'reimberg',
+    lambdaTemporal: LAMBDA_PADRAO,
+    anoReferencia: ANO_REFERENCIA_PADRAO,
+  };
 }
 
 export function criarConfigRedePadrao(): ConfigRede {
@@ -68,7 +78,7 @@ export function criarConfigRedePadrao(): ConfigRede {
     layout: 'forca',
     corPor: 'instituto',
     tamanhoPor: 'grau',
-    tiposRelacao: ['coautoria', 'orientacao', 'projeto'],
+    tiposRelacao: ['coautoria'],
     mostrarRotulos: false,
   };
 }

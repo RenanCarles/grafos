@@ -14,6 +14,9 @@ export interface EntradaRede {
 export interface ItemLegenda {
   rotulo: string;
   cor: string;
+  institutoId?: string;
+  comunidade?: number;
+  outros?: boolean;
 }
 
 export interface LinhaRede {
@@ -22,8 +25,11 @@ export interface LinhaRede {
   instituto: string;
   areas: string;
   grau: number;
+  forca: number | null;
   intermediacao: number;
   grupo: number;
+  vizinhosFora: number | null;
+  institutosDoGrupo: string;
 }
 
 export interface ModeloRede {
@@ -38,7 +44,13 @@ const TAMANHO_FIXO = 22;
 const TAMANHO_MIN = 14;
 const TAMANHO_MAX = 44;
 
-export function escalar(valor: number, min: number, max: number, saidaMin: number, saidaMax: number): number {
+export function escalar(
+  valor: number,
+  min: number,
+  max: number,
+  saidaMin: number,
+  saidaMax: number,
+): number {
   if (max === min) return (saidaMin + saidaMax) / 2;
   return saidaMin + ((valor - min) / (max - min)) * (saidaMax - saidaMin);
 }
@@ -65,13 +77,30 @@ function rotuloDoIndice(indice: number, config: ConfigRede, catalogo: Catalogo):
   }
 }
 
-function montarLegenda(indices: number[], config: ConfigRede, catalogo: Catalogo, modo: ModoCor): ItemLegenda[] {
+function montarLegenda(
+  indices: number[],
+  config: ConfigRede,
+  catalogo: Catalogo,
+  modo: ModoCor,
+): ItemLegenda[] {
   const presentes = [...new Set(indices)].sort((a, b) => a - b);
+  if (config.corPor === 'instituto') {
+    return presentes
+      .filter((i) => i >= 0)
+      .map((i) => ({
+        rotulo: catalogo.institutos[i].sigla,
+        cor: catalogo.institutos[i].cor ?? corRede(modo, i),
+        institutoId: catalogo.institutos[i].id,
+      }));
+  }
   const dentroDosSlots = (indice: number) => indice >= 0 && indice < SLOTS_REDE.length;
-  const legenda = presentes
-    .filter(dentroDosSlots)
-    .map((indice) => ({ rotulo: rotuloDoIndice(indice, config, catalogo), cor: corRede(modo, indice) }));
-  if (presentes.some((indice) => !dentroDosSlots(indice))) legenda.push({ rotulo: 'Outros', cor: corRede(modo, -1) });
+  const legenda: ItemLegenda[] = presentes.filter(dentroDosSlots).map((indice) => ({
+    rotulo: rotuloDoIndice(indice, config, catalogo),
+    cor: corRede(modo, indice),
+    ...(config.corPor === 'comunidade' ? { comunidade: indice } : {}),
+  }));
+  if (presentes.some((indice) => !dentroDosSlots(indice)))
+    legenda.push({ rotulo: 'Outros', cor: corRede(modo, -1), outros: true });
   return legenda;
 }
 
@@ -114,7 +143,7 @@ function montarEstilo(modo: ModoCor): StylesheetJson {
     {
       selector: 'edge',
       style: {
-        width: 'mapData(peso, 1, 6, 1, 4)',
+        width: 'data(espessura)',
         'line-color': chrome.tintaSecundaria,
         'line-opacity': 0.45,
       },
@@ -122,11 +151,24 @@ function montarEstilo(modo: ModoCor): StylesheetJson {
     { selector: 'edge[tipo = "orientacao"]', style: { 'line-style': 'dotted' } },
     { selector: 'edge[tipo = "projeto"]', style: { 'line-style': 'dashed' } },
     { selector: 'node:selected', style: { 'border-width': 4, 'border-color': chrome.tinta } },
+    { selector: '.apagado', style: { opacity: 0.12 } },
+    { selector: 'node.destaque', style: { 'border-width': 4, 'border-color': chrome.tinta } },
   ];
 }
 
 export function montarModeloRede({ rede, catalogo, config, modo }: EntradaRede): ModeloRede {
-  const metrica = (no: NoRede) => (config.tamanhoPor === 'grau' ? no.grau : no.intermediacao);
+  const metrica = (no: NoRede): number => {
+    switch (config.tamanhoPor) {
+      case 'forca':
+        return no.forca ?? 0;
+      case 'intermediacaoPonderada':
+        return no.intermediacaoPonderada ?? 0;
+      case 'grau':
+        return no.grau;
+      default:
+        return no.intermediacao;
+    }
+  };
   const valores = rede.nos.map(metrica);
   const min = Math.min(...valores);
   const max = Math.max(...valores);
@@ -142,39 +184,59 @@ export function montarModeloRede({ rede, catalogo, config, modo }: EntradaRede):
         id: no.id,
         nome: no.nome,
         label: config.mostrarRotulos ? no.nome : '',
-        cor: corRede(modo, indices[posicao]),
+        cor:
+          config.corPor === 'instituto'
+            ? (catalogo.institutos[indices[posicao]]?.cor ?? corRede(modo, indices[posicao]))
+            : corRede(modo, indices[posicao]),
         tamanho:
-          config.tamanhoPor === 'fixo' ? TAMANHO_FIXO : escalar(metrica(no), min, max, TAMANHO_MIN, TAMANHO_MAX),
+          config.tamanhoPor === 'fixo'
+            ? TAMANHO_FIXO
+            : escalar(metrica(no), min, max, TAMANHO_MIN, TAMANHO_MAX),
         grau: no.grau,
         intermediacao: no.intermediacao,
+        institutoId: no.institutoId,
+        instituto:
+          catalogo.institutos.find((i) => i.id === no.institutoId)?.sigla ?? no.institutoId,
+        comunidade: no.comunidade,
+        grupo: no.comunidade + 1,
       },
       position: { x: 240 * Math.cos(angulo), y: 240 * Math.sin(angulo) },
     };
   });
 
   const ids = new Set(rede.nos.map((no) => no.id));
-  const arestas: ElementDefinition[] = rede.arestas
-    .filter((a) => config.tiposRelacao.includes(a.tipo) && ids.has(a.origemId) && ids.has(a.destinoId))
-    .map((a) => ({
-      group: 'edges',
-      data: {
-        id: `${a.origemId}>${a.destinoId}:${a.tipo}`,
-        source: a.origemId,
-        target: a.destinoId,
-        tipo: a.tipo,
-        peso: a.peso,
-      },
-    }));
+  const relacoes = rede.arestas.filter(
+    (a) => config.tiposRelacao.includes(a.tipo) && ids.has(a.origemId) && ids.has(a.destinoId),
+  );
+  const pesos = relacoes.map((a) => a.peso);
+  const pesoMin = pesos.length ? Math.min(...pesos) : 0;
+  const pesoMax = pesos.length ? Math.max(...pesos) : 0;
+  const arestas: ElementDefinition[] = relacoes.map((a) => ({
+    group: 'edges',
+    data: {
+      id: `${a.origemId}>${a.destinoId}:${a.tipo}`,
+      source: a.origemId,
+      target: a.destinoId,
+      tipo: a.tipo,
+      peso: a.peso,
+      espessura: escalar(a.peso, pesoMin, pesoMax, 1, 4),
+    },
+  }));
 
   const linhas: LinhaRede[] = rede.nos
     .map((no) => ({
       id: no.id,
       nome: no.nome,
       instituto: catalogo.institutos.find((i) => i.id === no.institutoId)?.sigla ?? no.institutoId,
-      areas: no.areaIds.map((id) => catalogo.areas.find((a) => a.id === id)?.nome ?? id).join(', '),
+      areas:
+        no.areaIds.map((id) => catalogo.areas.find((a) => a.id === id)?.nome ?? id).join(', ') ||
+        'Não disponível nesta coleta',
       grau: no.grau,
+      forca: no.forca ?? null,
       intermediacao: no.intermediacao,
       grupo: no.comunidade + 1,
+      vizinhosFora: no.vizinhosFora ?? null,
+      institutosDoGrupo: no.institutosDoGrupo?.length ? no.institutosDoGrupo.join(', ') : '—',
     }))
     .sort((a, b) => b.grau - a.grau || a.nome.localeCompare(b.nome, 'pt-BR'));
 

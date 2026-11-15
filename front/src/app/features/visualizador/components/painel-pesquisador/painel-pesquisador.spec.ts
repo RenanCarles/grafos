@@ -14,7 +14,7 @@ describe('PainelPesquisador', () => {
     const fixture = TestBed.createComponent(PainelPesquisador);
     fixture.detectChanges();
     expect((fixture.nativeElement as HTMLElement).textContent).toContain(
-      'Selecione um pesquisador no grafo para ver os detalhes.',
+      'Selecione um pesquisador no grafo ou na tabela para ver os detalhes.',
     );
   });
 
@@ -29,5 +29,10 @@ describe('PainelPesquisador', () => {
     expect(texto).toContain('Sistemas e Tecnologia da Informação');
     expect(texto).toContain('Inteligência Artificial, Matemática Aplicada');
     expect(texto).toContain('0.100');
+    expect(texto).toContain('Parceiros em outro instituto');
+    expect(texto).toContain('1 de 2');
+    expect(texto).toContain('Institutos neste grupo');
+    expect(texto).toContain('IESTI');
+    expect(texto).toContain('Louvain');
   });
 });

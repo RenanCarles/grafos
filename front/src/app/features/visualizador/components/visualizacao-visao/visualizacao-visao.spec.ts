@@ -3,7 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { AreasPesquisa } from '@app/features/areas-pesquisa/components/areas-pesquisa/areas-pesquisa';
 import { RedeColaboracao } from '@app/features/rede-colaboracao/components/rede-colaboracao/rede-colaboracao';
 import type { NoRede } from '@app/shared/models/dominio';
-import { criarVisaoAreasFake, criarVisaoRedeFake } from '@app/shared/testing/fixtures';
+import {
+  criarVisaoAreasFake,
+  criarVisaoRedeFake,
+  provedoresDadosFake,
+} from '@app/shared/testing/fixtures';
 import { VisualizacaoVisao } from './visualizacao-visao';
 
 @Component({ selector: 'app-rede-colaboracao', template: 'REDE' })
@@ -21,7 +25,10 @@ class AreasFalsa {
 
 describe('VisualizacaoVisao', () => {
   beforeEach(async () => {
-    TestBed.configureTestingModule({ imports: [VisualizacaoVisao] });
+    TestBed.configureTestingModule({
+      imports: [VisualizacaoVisao],
+      providers: provedoresDadosFake(),
+    });
     TestBed.overrideComponent(VisualizacaoVisao, {
       remove: { imports: [RedeColaboracao, AreasPesquisa] },
       add: { imports: [RedeFalsa, AreasFalsa] },

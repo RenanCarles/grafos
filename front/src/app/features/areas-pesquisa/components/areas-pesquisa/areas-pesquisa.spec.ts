@@ -28,7 +28,10 @@ describe('AreasPesquisa', () => {
   }
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({ imports: [AreasPesquisa], providers: [...provedoresDadosFake()] });
+    TestBed.configureTestingModule({
+      imports: [AreasPesquisa],
+      providers: [...provedoresDadosFake()],
+    });
     TestBed.overrideComponent(AreasPesquisa, { set: { providers: [] } });
     TestBed.overrideComponent(AreasPesquisa, {
       remove: { imports: [NgxEchartsDirective] },
@@ -37,9 +40,26 @@ describe('AreasPesquisa', () => {
     await TestBed.compileComponents();
   });
 
+  it('explica a ausência de áreas e ainda apresenta barras por instituto', async () => {
+    const dados = { ...criarDadosAreasFake(), areas: [] };
+    vi.spyOn(TestBed.inject(AREAS_REPOSITORY), 'obterAreas').mockReturnValue(of(dados));
+    await montar();
+    expect(raiz().textContent).toContain('Áreas não disponíveis nesta coleta.');
+    fixture.componentRef.setInput('config', {
+      ...criarConfigAreasPadrao(),
+      agruparPor: 'instituto',
+    });
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.directive(EchartsFalso))).not.toBeNull();
+  });
+
   it('entrega as opções do gráfico para o ECharts', async () => {
     await montar();
-    const diretiva = fixture.debugElement.query(By.directive(EchartsFalso)).injector.get(EchartsFalso);
+    const diretiva = fixture.debugElement
+      .query(By.directive(EchartsFalso))
+      .injector.get(EchartsFalso);
     const opcoes = diretiva.options() as { series: { name: string }[] };
     expect(opcoes.series.map((s) => s.name)).toEqual(['Área-ponte', 'Demais áreas']);
   });
@@ -62,7 +82,9 @@ describe('AreasPesquisa', () => {
   });
 
   it('mostra o erro com opção de tentar novamente', async () => {
-    const falho: AreasRepository = { obterAreas: () => throwError(() => new Error('Falha ao carregar áreas')) };
+    const falho: AreasRepository = {
+      obterAreas: () => throwError(() => new Error('Falha ao carregar áreas')),
+    };
     TestBed.overrideProvider(AREAS_REPOSITORY, { useValue: falho });
     await montar();
     expect(raiz().textContent).toContain('Falha ao carregar áreas');
@@ -80,7 +102,9 @@ describe('AreasPesquisa', () => {
 
   it('recarrega os dados quando os filtros mudam', async () => {
     const obterAreas = vi.fn(() => of(criarDadosAreasFake()));
-    TestBed.overrideProvider(AREAS_REPOSITORY, { useValue: { obterAreas } satisfies AreasRepository });
+    TestBed.overrideProvider(AREAS_REPOSITORY, {
+      useValue: { obterAreas } satisfies AreasRepository,
+    });
     await montar();
     expect(obterAreas).toHaveBeenCalledTimes(1);
     fixture.componentRef.setInput('filtros', { ...criarFiltrosPadrao(), institutos: ['i1'] });

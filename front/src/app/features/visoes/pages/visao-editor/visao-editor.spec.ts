@@ -2,7 +2,9 @@ import { Component, input, output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, provideRouter } from '@angular/router';
-import { VISOES_REPOSITORY } from '@app/core/repositorios';
+import { CATALOGO_REPOSITORY, VISOES_REPOSITORY } from '@app/core/repositorios';
+import { of, throwError } from 'rxjs';
+import { criarCatalogoFake } from '@app/shared/testing/fixtures';
 import { VisualizacaoVisao } from '@app/features/visualizador/components/visualizacao-visao/visualizacao-visao';
 import { provedoresDadosFake } from '@app/shared/testing/fixtures';
 import { RepositorioVisoesFake } from '../../testing/repositorio-visoes-fake';
@@ -20,7 +22,8 @@ describe('VisaoEditor', () => {
   let navegar: ReturnType<typeof vi.spyOn>;
   const snack = { open: vi.fn() };
   const raiz = () => fixture.nativeElement as HTMLElement;
-  const campo = (nome: string) => raiz().querySelector<HTMLInputElement>(`[formcontrolname="${nome}"]`)!;
+  const campo = (nome: string) =>
+    raiz().querySelector<HTMLInputElement>(`[formcontrolname="${nome}"]`)!;
 
   function digitar(nome: string, valor: string): void {
     const el = campo(nome);
@@ -71,7 +74,32 @@ describe('VisaoEditor', () => {
     enviar();
     await fixture.whenStable();
     expect(criar).not.toHaveBeenCalled();
-    expect(snack.open).toHaveBeenCalledWith('Corrija os campos destacados.', 'Fechar', { duration: 4000 });
+    expect(snack.open).toHaveBeenCalledWith('Corrija os campos destacados.', 'Fechar', {
+      duration: 4000,
+    });
+  });
+
+  it('permite escolher Zanoli no editor e salva seus parâmetros com a visão', async () => {
+    await renderizar();
+    (raiz().querySelector('[formcontrolname="formulaPeso"]') as HTMLElement).click();
+    await renderizar();
+    const opcao = [...document.querySelectorAll<HTMLElement>('mat-option')].find((el) =>
+      el.textContent?.includes('Zanoli'),
+    )!;
+    opcao.click();
+    await renderizar();
+    expect(campo('lambdaTemporal')).not.toBeNull();
+    expect(campo('anoReferencia')).not.toBeNull();
+    digitar('nome', 'Rede Zanoli');
+    digitar('lambdaTemporal', '0.2');
+    digitar('anoReferencia', '2027');
+    enviar();
+    await vi.waitFor(() => expect(navegar).toHaveBeenCalledWith(['/visoes', 'novo']));
+    expect(repo.visoes.at(-1)!.filtros).toMatchObject({
+      formulaPeso: 'zanoli',
+      lambdaTemporal: 0.2,
+      anoReferencia: 2027,
+    });
   });
 
   it('salva uma visão nova válida e navega para o visualizador', async () => {
@@ -99,5 +127,36 @@ describe('VisaoEditor', () => {
     fixture.componentRef.setInput('id', 'inexistente');
     await renderizar();
     expect(raiz().textContent).toContain('Visão não encontrada.');
+  });
+
+  it('mostra falha de catálogo e permite tentar novamente sem usar um catálogo vazio', async () => {
+    const catalogo = TestBed.inject(CATALOGO_REPOSITORY);
+    const obter = vi
+      .spyOn(catalogo, 'obterCatalogo')
+      .mockReturnValue(throwError(() => new Error('Catálogo indisponível')));
+    await renderizar();
+    expect(raiz().textContent).toContain('Catálogo indisponível');
+    expect(raiz().querySelector('form')).toBeNull();
+    obter.mockReturnValue(of(criarCatalogoFake()));
+    raiz().querySelector<HTMLButtonElement>('app-estado-pagina button')!.click();
+    await renderizar();
+    expect(raiz().querySelector('form')).not.toBeNull();
+  });
+
+  it('desabilita áreas e relações não disponíveis sem impedir salvar uma rede', async () => {
+    vi.spyOn(TestBed.inject(CATALOGO_REPOSITORY), 'obterCatalogo').mockReturnValue(
+      of({ ...criarCatalogoFake(), areas: [] }),
+    );
+    await renderizar();
+    expect(raiz().querySelector('[formcontrolname="areas"]')?.getAttribute('aria-disabled')).toBe(
+      'true',
+    );
+    expect(raiz().textContent).toContain('Orientações e projetos ainda não foram integrados');
+    digitar('nome', 'Rede real');
+    enviar();
+    await vi.waitFor(() => expect(navegar).toHaveBeenCalledWith(['/visoes', 'novo']));
+    const criada = repo.visoes.at(-1)!;
+    expect(criada.filtros.areas).toEqual([]);
+    expect(criada.filtros.pesoMinimo).toBe(0);
   });
 });

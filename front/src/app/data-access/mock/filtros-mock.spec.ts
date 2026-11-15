@@ -4,7 +4,13 @@ import { agregarAreas, aplicarFiltros } from './filtros-mock';
 import type { DadosMock } from './gerar-dados';
 
 const no = (id: string, institutoId: string, areaIds: string[]): NoRede => ({
-  id, nome: id, institutoId, areaIds, grau: 0, intermediacao: 0, comunidade: 0,
+  id,
+  nome: id,
+  institutoId,
+  areaIds,
+  grau: 0,
+  intermediacao: 0,
+  comunidade: 0,
 });
 
 const dados: DadosMock = {
@@ -17,9 +23,14 @@ const dados: DadosMock = {
     { id: 'x', nome: 'Área X', grandeArea: 'G1' },
     { id: 'y', nome: 'Área Y', grandeArea: 'G2' },
   ],
-  nos: [no('n1', 'A', ['x']), no('n2', 'A', ['x']), no('n3', 'B', ['x', 'y']), no('n4', 'C', ['y'])],
+  nos: [
+    no('n1', 'A', ['x']),
+    no('n2', 'A', ['x']),
+    no('n3', 'B', ['x', 'y']),
+    no('n4', 'C', ['y']),
+  ],
   arestas: [
-    { origemId: 'n1', destinoId: 'n2', tipo: 'coautoria', peso: 3, ano: 2020 },
+    { origemId: 'n1', destinoId: 'n2', tipo: 'coautoria', peso: 3, ano: 2022 },
     { origemId: 'n2', destinoId: 'n3', tipo: 'projeto', peso: 1, ano: 2021 },
   ],
 };
@@ -44,8 +55,12 @@ describe('aplicarFiltros', () => {
   });
 
   it('filtra por período e por peso mínimo', () => {
-    expect(aplicarFiltros(dados, { ...criarFiltrosPadrao(), anoInicio: 2021, anoFim: 2021 }).arestas).toHaveLength(1);
-    expect(aplicarFiltros(dados, { ...criarFiltrosPadrao(), pesoMinimo: 3 }).arestas).toHaveLength(1);
+    expect(
+      aplicarFiltros(dados, { ...criarFiltrosPadrao(), anoInicio: 2021, anoFim: 2021 }).arestas,
+    ).toHaveLength(1);
+    expect(aplicarFiltros(dados, { ...criarFiltrosPadrao(), pesoMinimo: 3 }).arestas).toHaveLength(
+      1,
+    );
   });
 });
 
