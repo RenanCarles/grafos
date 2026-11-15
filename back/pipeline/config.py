@@ -5,6 +5,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 DADOS = RAIZ / "dados"
 BRUTOS = DADOS / "brutos"
 PROCESSADOS = DADOS / "processados"
+VISOES = DADOS / "visoes"
 
 DOCENTES_CSV = BRUTOS / "docentes_unifei.csv"
 OPENALEX_JSON = BRUTOS / "openalex_works_unifei.json"

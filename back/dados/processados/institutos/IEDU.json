@@ -10,10 +10,10 @@
   "vizinhosPorInstituto": {
    "IFQ": 4,
    "IEPG": 2,
+   "IRN": 1,
    "IMC": 1,
    "IESTI": 1,
-   "ISEE": 1,
-   "IRN": 1
+   "ISEE": 1
   },
   "arestasPorClasse": {
    "foco": 1,
@@ -23,7 +23,7 @@
   "pesoPorClasse": {
    "foco": 0.333333,
    "ponte": 8.533333,
-   "fora": 3.27619
+   "fora": 3.609524
   },
   "pesoPontesPorInstituto": {
    "IFQ": 3.666667,
@@ -181,7 +181,7 @@
    "institutoId": "isee",
    "noFoco": false,
    "grauSub": 3,
-   "forcaSub": 3.275,
+   "forcaSub": 3.375,
    "grauPonte": 1,
    "forcaPonte": 2.0
   },
@@ -191,7 +191,7 @@
    "institutoId": "iepg",
    "noFoco": false,
    "grauSub": 3,
-   "forcaSub": 2.642857,
+   "forcaSub": 2.97619,
    "grauPonte": 1,
    "forcaPonte": 0.2
   },
@@ -201,7 +201,7 @@
    "institutoId": "iepg",
    "noFoco": false,
    "grauSub": 2,
-   "forcaSub": 2.167857,
+   "forcaSub": 2.40119,
    "grauPonte": 1,
    "forcaPonte": 0.5
   },
@@ -295,14 +295,14 @@
    "origemId": "doc-535e4c13a1",
    "destinoId": "doc-4f3aeaf834",
    "classe": "fora",
-   "peso": 1.667857,
+   "peso": 1.90119,
    "nProducoes": 9,
    "porTipoProducao": {
     "artigo_periodico": 7,
     "livro": 0,
-    "evento_completo": 0,
+    "evento_completo": 2,
     "capitulo": 0,
-    "outro": 2
+    "outro": 0
    }
   },
   {
@@ -337,14 +337,14 @@
    "origemId": "doc-535e4c13a1",
    "destinoId": "doc-afc0cce332",
    "classe": "fora",
-   "peso": 0.775,
+   "peso": 0.875,
    "nProducoes": 4,
    "porTipoProducao": {
     "artigo_periodico": 3,
     "livro": 0,
-    "evento_completo": 0,
+    "evento_completo": 1,
     "capitulo": 0,
-    "outro": 1
+    "outro": 0
    }
   },
   {

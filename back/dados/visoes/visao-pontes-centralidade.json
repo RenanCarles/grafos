@@ -1,0 +1,27 @@
+{
+  "id": "visao-pontes-centralidade",
+  "nome": "Pontes e centralidade",
+  "descricao": "Comunidades de colaboração e pesquisadores com maior intermediação na rede completa.",
+  "tipo": "rede",
+  "filtros": {
+    "institutos": [],
+    "areas": [],
+    "anoInicio": 2021,
+    "anoFim": 2025,
+    "pesoMinimo": 0,
+    "formulaPeso": "reimberg",
+    "lambdaTemporal": 0.1,
+    "anoReferencia": 2026
+  },
+  "config": {
+    "layout": "forca",
+    "corPor": "comunidade",
+    "tamanhoPor": "intermediacao",
+    "tiposRelacao": [
+      "coautoria"
+    ],
+    "mostrarRotulos": false
+  },
+  "criadoEm": "2026-11-15T18:57:28.265Z",
+  "atualizadoEm": "2026-11-15T18:57:28.265Z"
+}

@@ -1,4 +1,6 @@
-"""Construção do grafo: nós = docentes, arestas = produções em comum, peso = Σ α(tipo)/(n−1).
+"""Construção do grafo: docentes e coautorias, com peso selecionável por produção.
+
+O padrão Reimberg usa Σ α(tipo)/(n−1); a API também solicita produção Zanoli.
 
 Internamente os docentes são indexados pelo SIAPE (chave do SIGAA). Para fora (JSON do front),
 use `id_publico`, que não expõe o SIAPE.
@@ -11,6 +13,7 @@ from itertools import combinations
 from .casamento import Casador
 from .config import ALPHA
 from .openalex import eh_unifei, tipo_producao
+from .pesos import ParametrosPeso, peso_producao
 
 
 def id_publico(siape: str) -> str:
@@ -35,7 +38,7 @@ class Grafo:
         return {d["siape"]: d for d in self.docentes}
 
 
-def construir(docentes: list[dict], works: list[dict]) -> Grafo:
+def construir(docentes: list[dict], works: list[dict], parametros: ParametrosPeso = ParametrosPeso()) -> Grafo:
     g = Grafo(docentes=docentes)
     casador = Casador(docentes)
 
@@ -58,8 +61,8 @@ def construir(docentes: list[dict], works: list[dict]) -> Grafo:
             continue
 
         tipo = tipo_producao(w)
-        contrib = ALPHA[tipo] / (n - 1)
         ano = w.get("publication_year")
+        contrib = peso_producao(tipo, n, ano, parametros)
         for a, b in combinations(sorted(unifei), 2):
             for e in (g.arestas[(a, b)], g.arestas_ano[(a, b, ano)]):
                 e["peso"] += contrib

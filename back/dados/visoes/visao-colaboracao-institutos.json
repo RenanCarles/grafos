@@ -1,0 +1,27 @@
+{
+  "id": "visao-colaboracao-institutos",
+  "nome": "Colaboração entre institutos",
+  "descricao": "Rede de coautoria de 2021–2025, com cor por instituto.",
+  "tipo": "rede",
+  "filtros": {
+    "institutos": [],
+    "areas": [],
+    "anoInicio": 2021,
+    "anoFim": 2025,
+    "pesoMinimo": 0,
+    "formulaPeso": "reimberg",
+    "lambdaTemporal": 0.1,
+    "anoReferencia": 2026
+  },
+  "config": {
+    "layout": "forca",
+    "corPor": "instituto",
+    "tamanhoPor": "grau",
+    "tiposRelacao": [
+      "coautoria"
+    ],
+    "mostrarRotulos": false
+  },
+  "criadoEm": "2026-11-15T18:57:28.265Z",
+  "atualizadoEm": "2026-11-15T18:57:28.265Z"
+}

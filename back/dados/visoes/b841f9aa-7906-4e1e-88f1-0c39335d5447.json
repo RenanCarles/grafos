@@ -1,0 +1,30 @@
+{
+  "nome": "Comunidades",
+  "descricao": "",
+  "tipo": "rede",
+  "filtros": {
+    "institutos": [
+      "iesti",
+      "imc"
+    ],
+    "areas": [],
+    "anoInicio": 2021,
+    "anoFim": 2025,
+    "pesoMinimo": 0.1,
+    "formulaPeso": "reimberg",
+    "lambdaTemporal": 0.1,
+    "anoReferencia": 2026
+  },
+  "config": {
+    "layout": "forca",
+    "corPor": "comunidade",
+    "tamanhoPor": "grau",
+    "tiposRelacao": [
+      "coautoria"
+    ],
+    "mostrarRotulos": false
+  },
+  "id": "b841f9aa-7906-4e1e-88f1-0c39335d5447",
+  "criadoEm": "2026-11-15T17:43:07.023Z",
+  "atualizadoEm": "2026-11-15T17:43:07.023Z"
+}

@@ -76,7 +76,8 @@ OpenAlex (pubs) ───┘
    - grau;
    - força (soma dos pesos);
    - intermediação, sem peso e ponderada;
-   - comunidade (Louvain).
+   - comunidade (Louvain);
+   - parceiros em outro instituto e institutos presentes no grupo, na rede completa da fórmula.
 6. **Grafo por instituto.** Para cada instituto, um subgrafo com os docentes dele + os docentes de fora com
    ligação direta. As arestas são classificadas em `foco` (dentro), `ponte` (instituto ↔ fora) e `fora`
    (fora ↔ fora).
@@ -139,19 +140,18 @@ Para coletar tudo de novo (SIGAA + OpenAlex): `python -m pipeline --coletar`.
 
 ---
 
-## 6. ⚠️ O que o front precisa ajustar (nada foi alterado no front)
+## 6. Integração do frontend concluída
 
-1. **`pesoMinimo`.** O formulário aceita 1 a 6, e o padrão é 1, porque os pesos do mock são inteiros. Os
-   pesos reais são frações: **só 93 das 852 arestas têm peso ≥ 1** (mediana 0,3). Com o padrão atual, 89% da
-   rede some. **Sugestão:** padrão 0, passo 0,1, sem máximo fixo.
-2. **Anos.** O front começa em 2018; os dados vão de **2021 a 2025**.
-3. **Áreas de pesquisa.** Ainda estão vazias (`catalogo.areas = []`, `areaIds = []`); virão do Lattes. A
-   visão de áreas fica vazia, e "cor por área" não tem efeito.
-4. **Comunidades.** São 231: 25 com 2 ou mais docentes e 206 unitárias (docentes sem aresta). Sugestão:
-   cinza para as unitárias.
-5. **Ligar na API.** Criar versões HTTP dos 3 repositórios e trocar em `provideDados()`. A CORS já está
-   liberada para `http://localhost:4200`.
-6. **Nomes** vêm como no SIGAA (MAIÚSCULAS). A formatação fica a cargo do front.
+O frontend consulta a API por repositórios HTTP, agrega os anos antes do corte de peso e usa a janela
+2021–2025 com peso mínimo inicial 0. A espessura das arestas considera pesos fracionários.
+
+A interface informa fonte, período e escopo global das métricas. Áreas vazias são sinalizadas, assim como
+a indisponibilidade de orientação e projeto. A distribuição de docentes por instituto funciona em barras.
+As cores dos 12 institutos são lidas do catálogo; comunidades além da paleta são mostradas em “Outros”.
+
+Visões reais usam uma nova chave no navegador, preservando os dados antigos do protótipo.
+Veja [front/README.md](../front/README.md) para executar e [o guia Word](../docs/Guia_Integracao_Frontend.docx)
+para a explicação didática e técnica.
 
 ---
 
@@ -173,7 +173,7 @@ Para coletar tudo de novo (SIGAA + OpenAlex): `python -m pipeline --coletar`.
 - [ ] Pedir à PRPPG/DTI acesso ao Extrator Lattes (lista de IDs: coluna `lattes_id` de `docentes_unifei.csv`).
 - [ ] Trocar a fonte das arestas para o Lattes (ligação por ID), adicionando relações `orientacao` e `projeto`.
 - [ ] Preencher áreas do conhecimento (`catalogo.areas`, `areaIds`).
-- [ ] Front: repositórios HTTP + ajustes da seção 6.
+- [x] Front: repositórios HTTP + ajustes da seção 6.
 - [ ] Análise de sensibilidade dos α.
 
 ---

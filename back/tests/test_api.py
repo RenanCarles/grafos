@@ -43,7 +43,7 @@ def test_filtro_instituto_e_ano():
 
 def test_peso_minimo():
     r = c.get("/api/rede", params={"agregar": "true", "pesoMinimo": 1}).json()
-    assert len(r["arestas"]) == 93 and all(e["peso"] >= 1 for e in r["arestas"])
+    assert len(r["arestas"]) == 115 and all(e["peso"] >= 1 for e in r["arestas"])
 
 
 def test_areas_e_vizinhanca():

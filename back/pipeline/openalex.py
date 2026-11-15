@@ -35,9 +35,15 @@ def carregar(origem=OPENALEX_JSON) -> list[dict]:
 
 
 def tipo_producao(w: dict) -> str:
-    """Classifica a produção nas chaves de ALPHA."""
+    """Classifica a produção nas chaves de ALPHA.
+
+    `conference-paper` é o tipo nativo de trabalho de evento no OpenAlex.
+    Resumo (`conference-abstract`) permanece em outro, com α = 0,3.
+    """
     t = w.get("type")
     src = ((w.get("primary_location") or {}).get("source") or {}).get("type")
+    if t == "conference-paper":
+        return "evento_completo"
     if t in ("article", "review"):
         return "evento_completo" if src == "conference" else "artigo_periodico"
     if t == "book":

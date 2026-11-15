@@ -1,6 +1,6 @@
 """Métricas de rede sobre o grafo agregado (todos os anos).
 
-- grau / força: iguais às do esboço original.
+- grau / força: iguais às do esboço original quando os pesos são Reimberg.
 - intermediacao: Brandes sem pesos, normalizada em [0, 1] — mesma definição do mock do front
   (front/src/app/data-access/mock/metricas-rede.ts).
 - intermediacaoPonderada: Brandes usando distância = 1/peso (laço forte = caminho curto).

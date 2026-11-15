@@ -79,6 +79,8 @@ back/
   // extras
   "forca": 4.21,                  // soma dos pesos
   "intermediacaoPonderada": 0.01, // Brandes com distância = 1/peso
+  "vizinhosFora": 4,              // só na resposta da API: parceiros de outro instituto
+  "institutosDoGrupo": ["IMC", "IESTI", "ISEE"], // só na resposta da API: siglas do grupo de Louvain
   "producoes": 37,                // produções no OpenAlex
   "categoria": "Ativo Permanente", "titulacao": "DOUTOR", "lattesId": "1234567890123456"
 }
@@ -115,18 +117,49 @@ Os filtros reproduzem `aplicarFiltros()`/`agregarAreas()` de `front/src/app/data
 `agregar=true` soma os anos da janela por par **antes** de aplicar `pesoMinimo` (recomendado).
 CORS liberado para `http://localhost:4200`.
 
-## ⚠️ Pontos de integração com o front (não alterados aqui)
+## Integração com o frontend
 
-1. **`pesoMinimo`**: o formulário do front valida `min 1, max 6` e o padrão é `1` (pesos inteiros do mock).
-   Os pesos reais são fracionários — **só 93 das 852 arestas têm peso ≥ 1** (mediana 0,3). Sugestão: padrão
-   `0`, passo `0.1`, sem máximo fixo.
-2. **Anos**: o front usa `ANO_MIN = 2018`; os dados cobrem **2021–2025**.
-3. **Áreas**: `catalogo.areas` e `areaIds` estão vazios (o OpenAlex não foi usado para isso; virão do Lattes).
-   A visão de áreas vai aparecer vazia, e `corPor: 'area'` não terá efeito.
-4. **Comunidades**: 231 no total — 25 com 2+ docentes e 206 unitárias (docentes sem aresta). A paleta do front
-   precisa lidar com índices altos (ex.: cinza para comunidades unitárias).
-5. **Repositórios HTTP**: hoje `provideDados()` usa os mocks; basta criar implementações HTTP dos 3
-   repositórios apontando para os endpoints acima.
+O frontend já usa repositórios HTTP para catálogo, rede, áreas, metadados e visões. As consultas de rede e áreas
+enviam `agregar=true`. O proxy de desenvolvimento encaminha `/api` à porta 8000.
+
+### Visões em arquivo
+
+`GET /api/visoes`, `POST /api/visoes`, `GET /api/visoes/{id}`, `PUT /api/visoes/{id}`, `POST /api/visoes/{id}/duplicar`
+e `DELETE /api/visoes/{id}` guardam cada visão em `dados/visoes/{id}.json`. `POST /api/visoes/importar` grava uma visão
+já existente com o mesmo id e, se o arquivo já estiver lá, devolve o conteúdo do disco. A primeira consulta cria a pasta
+e as duas visões iniciais. Uma pasta já iniciada e sem JSON responde lista vazia. Arquivo ilegível fica no disco e sai da lista.
+
+- Filtros padrão: 2021–2025 e peso mínimo 0, com suporte a frações e sem máximo fixo.
+- Áreas permanecem vazias; a interface informa a limitação e desabilita filtro/cor por área.
+- Apenas coautoria está disponível. Orientação e projeto ainda dependem da integração de fontes.
+- As métricas dos nós são globais, calculadas em 2021–2025; o filtro não as recalcula.
+- Cores institucionais vêm do catálogo. Comunidades além dos slots da paleta são agrupadas visualmente em “Outros”.
+
+Veja [o guia de execução do frontend](../front/README.md) e o [documento Word](../docs/Guia_Integracao_Frontend.docx).
+
+### Seleção da fórmula
+
+`GET /api/rede`, `/api/areas` e `/api/meta` aceitam:
+
+| Parâmetro | Padrão | Valores |
+|---|---|---|
+| `formulaPeso` | `reimberg` | `reimberg` ou `zanoli` |
+| `lambdaTemporal` | `0.1` | 0 a 0,5, finito; aplicado a Zanoli |
+| `anoReferencia` | `2026` | Inteiro de 2025 a 2100; aplicado a Zanoli |
+
+Exemplo: `/api/rede?formulaPeso=zanoli&lambdaTemporal=0.1&anoReferencia=2026&agregar=true&pesoMinimo=0`.
+
+Zanoli calcula **somente a produção** com raiz no denominador e decaimento temporal; orientações, bancas e projetos
+não têm dados disponíveis. A resposta de rede inclui metadados com `idFormula`, parâmetros, componentes disponíveis/indisponíveis
+e escopo das métricas. Cada nó da resposta traz `vizinhosFora` e `institutosDoGrupo`, calculados na rede
+completa da fórmula antes dos filtros. `meta.leituraGrupos` compara as partições de Reimberg e Zanoli
+sem devolver a segunda rede. Esses campos são acrescentados em memória; os JSON exportados não precisam
+ser regenerados para exibi-los. Consulte [MODELAGEM.md](docs/MODELAGEM.md) para as equações completas propostas.
+
+`api/modelos_peso.py` constrói redes alternativas em memória, com cache limitado a oito configurações Zanoli.
+`pipeline/pesos.py` contém a função matemática e os parâmetros imutáveis. As publicações brutas são necessárias apenas para Zanoli;
+Reimberg usa a rede processada original. Reinicie a API após trocar arquivos da coleta, para invalidar os caches.
+Os endpoints de vizinhança e matriz de institutos permanecem nos dados exportados de referência Reimberg e não aceitam essa seleção.
 
 ## Igualdade com o esboço
 
