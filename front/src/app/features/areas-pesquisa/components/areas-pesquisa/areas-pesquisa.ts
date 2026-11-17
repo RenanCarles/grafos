@@ -2,9 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   inject,
   input,
   linkedSignal,
+  output,
   signal,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -32,6 +34,7 @@ import { montarModeloAreas, type ModeloAreas } from '../../services/montar-model
 export class AreasPesquisa {
   readonly filtros = input.required<FiltrosVisao>();
   readonly config = input.required<ConfigAreas>();
+  readonly dadosCarregados = output<DadosAreas>();
 
   private readonly repositorio = inject(AREAS_REPOSITORY);
   private readonly tema = inject(TemaService);
@@ -70,6 +73,13 @@ export class AreasPesquisa {
   protected readonly vazio = computed(() => this.modelo()?.vazio === true);
   protected readonly semAreas = computed(() => this.ultimosDados()?.areas.length === 0);
   protected readonly mostrarEstado = computed(() => this.estado() !== 'pronto' || this.vazio());
+
+  constructor() {
+    effect(() => {
+      const dados = this.ultimosDados();
+      if (dados) this.dadosCarregados.emit(dados);
+    });
+  }
 
   protected recarregar(): void {
     this.recurso.reload();

@@ -12,10 +12,20 @@
     </header>
 
     <div class="conteudo" [class.com-painel]="v.tipo === 'rede'">
-      <app-visualizacao-visao [visao]="v" (noSelecionado)="noSelecionado.set($event)" />
+      <app-visualizacao-visao
+        [visao]="v"
+        [(grupoSelecionado)]="grupoSelecionado"
+        (noSelecionado)="noSelecionado.set($event)"
+        (redeCarregada)="redeCarregada.set($event)"
+      />
       @if (v.tipo === 'rede') {
         <aside class="painel" aria-label="Detalhes do pesquisador">
           <app-painel-pesquisador [no]="noSelecionado()" />
+          <app-painel-comunidades
+            [entrada]="redeCarregada()"
+            [selecionado]="grupoSelecionado()"
+            (selecionar)="grupoSelecionado.set($event)"
+          />
         </aside>
       }
     </div>

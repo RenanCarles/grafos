@@ -6,6 +6,7 @@ import type { NoRede } from '@app/shared/models/dominio';
 import { criarConfigRedePadrao, criarFiltrosPadrao } from '@app/shared/models/visao';
 import { criarRedeFake, provedoresDadosFake } from '@app/shared/testing/fixtures';
 import { FABRICA_CYTOSCAPE, type FabricaCytoscape } from '../../services/fabrica-cytoscape';
+import type { EntradaCardsRede } from '../../services/montar-cards-rede';
 import { RedeColaboracao } from './rede-colaboracao';
 
 describe('RedeColaboracao', () => {
@@ -43,6 +44,22 @@ describe('RedeColaboracao', () => {
     await montar();
     expect(instancia?.nodes()).toHaveLength(5);
     expect(instancia?.edges()).toHaveLength(2);
+  });
+
+  it('emite a rede e o catálogo carregados', async () => {
+    fixture = TestBed.createComponent(RedeColaboracao);
+    const emitidos: EntradaCardsRede[] = [];
+    fixture.componentInstance.dadosCarregados.subscribe((entrada) => emitidos.push(entrada));
+    fixture.componentRef.setInput('filtros', criarFiltrosPadrao());
+    fixture.componentRef.setInput('config', criarConfigRedePadrao());
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(emitidos.length).toBeGreaterThan(0);
+    expect(emitidos.at(-1)?.rede.nos).toHaveLength(5);
+    expect(emitidos.at(-1)?.catalogo.institutos).toHaveLength(3);
   });
 
   it('mostra a legenda por instituto', async () => {
@@ -108,10 +125,7 @@ describe('RedeColaboracao', () => {
 
   it('explica a comunidade clicada e destaca os membros do grupo', async () => {
     await montar();
-    const botao = [...raiz().querySelectorAll('.comunidades button')].find((item) =>
-      item.textContent?.includes('Grupo 1'),
-    ) as HTMLButtonElement;
-    botao.click();
+    fixture.componentRef.setInput('grupoSelecionado', 0);
     await fixture.whenStable();
     fixture.detectChanges();
     const ficha = raiz().querySelector('.ficha')?.textContent ?? '';
@@ -121,6 +135,43 @@ describe('RedeColaboracao', () => {
     expect(instancia!.$id('p1').hasClass('destaque')).toBe(true);
     expect(instancia!.$id('p2').hasClass('destaque')).toBe(true);
     expect(instancia!.$id('p3').hasClass('apagado')).toBe(true);
+  });
+
+  it('limpa o grupo selecionado ao tocar num pesquisador', async () => {
+    await montar();
+    fixture.componentRef.setInput('grupoSelecionado', 0);
+    await fixture.whenStable();
+    fixture.detectChanges();
+    instancia!.$id('p3').emit('tap');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(fixture.componentInstance.grupoSelecionado()).toBeNull();
+    expect(raiz().querySelector('.ficha')?.textContent).toContain('Carla Dias');
+  });
+
+  it('informa o grupo aberto pelo botão da ficha do pesquisador', async () => {
+    await montar();
+    instancia!.$id('p1').emit('tap');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const abrir = [...raiz().querySelectorAll('.ficha button')].find((botao) =>
+      botao.textContent?.includes('Ver o grupo 1'),
+    ) as HTMLButtonElement;
+    abrir.click();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(fixture.componentInstance.grupoSelecionado()).toBe(0);
+    expect(instancia!.$id('p2').hasClass('destaque')).toBe(true);
+  });
+
+  it('avisa que nenhum pesquisador está selecionado quando um grupo é escolhido de fora', async () => {
+    await montar();
+    const emitidos: (NoRede | null)[] = [];
+    fixture.componentInstance.noSelecionado.subscribe((no) => emitidos.push(no));
+    fixture.componentRef.setInput('grupoSelecionado', 1);
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(emitidos).toContain(null);
   });
 
   it('fecha a ficha ao clicar no fundo do grafo', async () => {

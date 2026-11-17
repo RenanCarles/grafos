@@ -13,6 +13,7 @@ import { VisaoEditor } from './visao-editor';
 @Component({ selector: 'app-visualizacao-visao', template: 'PREVIA' })
 class PreviaFalsa {
   readonly visao = input<unknown>();
+  readonly mostrarMetricas = input<boolean>();
   readonly noSelecionado = output<unknown>();
 }
 

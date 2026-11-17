@@ -5,9 +5,11 @@ import {
   ElementRef,
   afterRenderEffect,
   computed,
+  effect,
   inject,
   input,
   linkedSignal,
+  model,
   output,
   signal,
   viewChild,
@@ -24,6 +26,7 @@ import { mensagemDe } from '@app/shared/util/mensagem-de-erro';
 import { valorDe } from '@app/shared/util/recurso';
 import { SLOTS_REDE } from '@app/shared/viz/paleta';
 import { FABRICA_CYTOSCAPE } from '../../services/fabrica-cytoscape';
+import type { EntradaCardsRede } from '../../services/montar-cards-rede';
 import {
   montarModeloRede,
   type ItemLegenda,
@@ -84,6 +87,8 @@ export class RedeColaboracao {
   readonly filtros = input.required<FiltrosVisao>();
   readonly config = input.required<ConfigRede>();
   readonly noSelecionado = output<NoRede | null>();
+  readonly dadosCarregados = output<EntradaCardsRede>();
+  readonly grupoSelecionado = model<number | null>(null);
 
   private readonly redeRepositorio = inject(REDE_REPOSITORY);
   private readonly catalogoRepositorio = inject(CATALOGO_REPOSITORY);
@@ -105,7 +110,11 @@ export class RedeColaboracao {
     coluna: 'grau',
     direcao: 'desc',
   });
-  protected readonly foco = signal<FocoGrafo | null>(null);
+  private readonly focoLocal = signal<FocoGrafo | null>(null);
+  protected readonly foco = computed<FocoGrafo | null>(() => {
+    const grupo = this.grupoSelecionado();
+    return grupo === null ? this.focoLocal() : { tipo: 'comunidade', indice: grupo };
+  });
 
   private readonly filtrosEstaveis = computed(() => this.filtros(), {
     equal: (a, b) => JSON.stringify(a) === JSON.stringify(b),
@@ -243,12 +252,12 @@ export class RedeColaboracao {
 
   protected selecionarPessoa(id: string): void {
     const no = this.ultimaRede()?.nos.find((item) => item.id === id) ?? null;
-    this.foco.set(no ? { tipo: 'pessoa', id } : null);
+    this.definirFoco(no ? { tipo: 'pessoa', id } : null);
     this.noSelecionado.emit(no);
   }
 
   protected abrirComunidade(indice: number): void {
-    this.foco.set({ tipo: 'comunidade', indice });
+    this.definirFoco({ tipo: 'comunidade', indice });
     this.noSelecionado.emit(null);
   }
 
@@ -258,24 +267,24 @@ export class RedeColaboracao {
       return;
     }
     if (item.outros) {
-      this.foco.set({ tipo: 'outros' });
+      this.definirFoco({ tipo: 'outros' });
       this.noSelecionado.emit(null);
       return;
     }
     if (item.institutoId) {
-      this.foco.set({ tipo: 'instituto', id: item.institutoId });
+      this.definirFoco({ tipo: 'instituto', id: item.institutoId });
       this.noSelecionado.emit(null);
     }
   }
 
   protected limparFoco(): void {
-    this.foco.set(null);
+    this.definirFoco(null);
     this.noSelecionado.emit(null);
   }
 
-  protected comunidadePressionada(indice: number): boolean {
-    const foco = this.foco();
-    return foco?.tipo === 'comunidade' && foco.indice === indice;
+  private definirFoco(foco: FocoGrafo | null): void {
+    this.focoLocal.set(foco?.tipo === 'comunidade' ? null : foco);
+    this.grupoSelecionado.set(foco?.tipo === 'comunidade' ? foco.indice : null);
   }
 
   protected legendaPressionada(item: ItemLegenda): boolean {
@@ -296,6 +305,16 @@ export class RedeColaboracao {
   }
 
   constructor() {
+    effect(() => {
+      if (this.grupoSelecionado() !== null) this.noSelecionado.emit(null);
+    });
+
+    effect(() => {
+      const rede = this.ultimaRede();
+      const catalogo = valorDe(this.catalogoRecurso);
+      if (rede && catalogo) this.dadosCarregados.emit({ rede, catalogo });
+    });
+
     afterRenderEffect(() => {
       const modelo = this.modelo();
       const host = this.host()?.nativeElement;

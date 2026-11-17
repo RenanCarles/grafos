@@ -1,11 +1,13 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { VISOES_REPOSITORY, type VisoesRepository } from '@app/core/repositorios';
+import type { EntradaCardsRede } from '@app/features/rede-colaboracao/services/montar-cards-rede';
 import type { NoRede } from '@app/shared/models/dominio';
 import {
+  criarCatalogoFake,
   criarRedeFake,
   criarVisaoAreasFake,
   criarVisaoRedeFake,
@@ -18,6 +20,8 @@ import { Visualizador } from './visualizador';
 class VisualizacaoFalsa {
   readonly visao = input<unknown>();
   readonly noSelecionado = output<NoRede | null>();
+  readonly grupoSelecionado = model<number | null>(null);
+  readonly redeCarregada = output<EntradaCardsRede>();
 }
 
 describe('Visualizador', () => {
@@ -68,6 +72,39 @@ describe('Visualizador', () => {
     await fixture.whenStable();
     fixture.detectChanges();
     expect(raiz().querySelector('aside')?.textContent).toContain('Ana Souza');
+  });
+
+  it('lista as comunidades no painel da direita, depois dos detalhes do pesquisador', async () => {
+    await abrir('v-rede');
+    const falsa = fixture.debugElement.query(By.directive(VisualizacaoFalsa)).injector.get(VisualizacaoFalsa);
+    falsa.redeCarregada.emit({ rede: criarRedeFake(), catalogo: criarCatalogoFake() });
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const painel = raiz().querySelector('aside')!;
+    expect(painel.textContent).toContain('Comunidades');
+    expect(painel.textContent).toContain('Grupo 1 · 2 pessoas');
+    const detalhes = painel.querySelector('app-painel-pesquisador')!;
+    const comunidades = painel.querySelector('app-painel-comunidades')!;
+    expect(detalhes.compareDocumentPosition(comunidades) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it('envia ao grafo o grupo escolhido no painel e o marca como selecionado', async () => {
+    await abrir('v-rede');
+    const falsa = fixture.debugElement.query(By.directive(VisualizacaoFalsa)).injector.get(VisualizacaoFalsa);
+    falsa.redeCarregada.emit({ rede: criarRedeFake(), catalogo: criarCatalogoFake() });
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const botoes = raiz().querySelectorAll<HTMLButtonElement>('app-painel-comunidades li button');
+    botoes[1].click();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(falsa.grupoSelecionado()).toBe(1);
+    expect(
+      raiz().querySelectorAll('app-painel-comunidades li button')[1].getAttribute('aria-pressed'),
+    ).toBe('true');
   });
 
   it('não mostra o painel de pesquisador para visões de áreas', async () => {

@@ -4,16 +4,26 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { VISOES_REPOSITORY } from '@app/core/repositorios';
+import type { EntradaCardsRede } from '@app/features/rede-colaboracao/services/montar-cards-rede';
 import { EstadoPagina, type EstadoCarga } from '@app/shared/components/estado-pagina';
 import type { NoRede } from '@app/shared/models/dominio';
 import { mensagemDe } from '@app/shared/util/mensagem-de-erro';
 import { valorDe } from '@app/shared/util/recurso';
+import { PainelComunidades } from '../../components/painel-comunidades/painel-comunidades';
 import { PainelPesquisador } from '../../components/painel-pesquisador/painel-pesquisador';
 import { VisualizacaoVisao } from '../../components/visualizacao-visao/visualizacao-visao';
 
 @Component({
   selector: 'app-visualizador',
-  imports: [RouterLink, MatButtonModule, MatIconModule, EstadoPagina, VisualizacaoVisao, PainelPesquisador],
+  imports: [
+    RouterLink,
+    MatButtonModule,
+    MatIconModule,
+    EstadoPagina,
+    VisualizacaoVisao,
+    PainelPesquisador,
+    PainelComunidades,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './visualizador.html',
   styleUrl: './visualizador.scss',
@@ -35,6 +45,14 @@ export class Visualizador {
   });
   protected readonly mensagemErro = computed(() => mensagemDe(this.recurso.error()));
   protected readonly noSelecionado = linkedSignal<string, NoRede | null>({
+    source: this.id,
+    computation: () => null,
+  });
+  protected readonly redeCarregada = linkedSignal<string, EntradaCardsRede | null>({
+    source: this.id,
+    computation: () => null,
+  });
+  protected readonly grupoSelecionado = linkedSignal<string, number | null>({
     source: this.id,
     computation: () => null,
   });

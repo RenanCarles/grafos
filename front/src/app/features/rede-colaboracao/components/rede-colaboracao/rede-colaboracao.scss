@@ -153,13 +153,10 @@
   border-radius: 50%;
 }
 
-.ficha,
-.comunidades {
+.ficha {
   flex: none;
   min-width: 0;
   margin-top: 12px;
-}
-.ficha {
   max-height: 14rem;
   overflow: auto;
   padding: 12px 14px;
@@ -173,14 +170,12 @@
   gap: 12px;
   align-items: flex-start;
 }
-.ficha h2,
-.comunidades h2 {
+.ficha h2 {
   margin: 0;
   font-size: 1rem;
 }
 .ficha .subtitulo,
-.ficha p,
-.comunidades p {
+.ficha p {
   margin: 8px 0 0;
 }
 .ficha dl {
@@ -198,8 +193,7 @@
   margin: 0;
   font-variant-numeric: tabular-nums;
 }
-.ficha button,
-.comunidades button {
+.ficha button {
   margin-top: 8px;
   padding: 4px 10px;
   border: 1px solid var(--viz-grid);
@@ -209,28 +203,6 @@
   font: inherit;
   font-size: 0.8125rem;
   cursor: pointer;
-}
-.comunidades {
-  max-height: 7.5rem;
-  overflow: auto;
-}
-.comunidades ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.comunidades li {
-  min-width: 0;
-}
-.comunidades button {
-  margin-top: 0;
-  white-space: nowrap;
-}
-.comunidades button[aria-pressed='true'] {
-  border-color: var(--viz-ink);
 }
 
 .dica {

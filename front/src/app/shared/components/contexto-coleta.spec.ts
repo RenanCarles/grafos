@@ -22,7 +22,7 @@ describe('ContextoColeta', () => {
     expect(texto).toContain('coautoria');
   });
 
-  it('explica que Zanoli representa apenas produção nesta coleta', async () => {
+  it('consulta os metadados com a fórmula da visão sem exibir o texto das fórmulas', async () => {
     const obter = vi.spyOn(TestBed.inject(METADADOS_REPOSITORY), 'obterMetadados');
     const fixture = TestBed.createComponent(ContextoColeta);
     fixture.componentRef.setInput('filtros', { ...criarFiltrosPadrao(), formulaPeso: 'zanoli' });
@@ -34,9 +34,11 @@ describe('ContextoColeta', () => {
       lambdaTemporal: 0.1,
       anoReferencia: 2026,
     });
-    expect(fixture.nativeElement.textContent).toContain('somente W_prod');
-    expect(fixture.nativeElement.textContent).toContain('dados não disponíveis');
-    expect(fixture.nativeElement.textContent).toContain('W_banca = Σ 0,3');
+    const texto = fixture.nativeElement.textContent;
+    expect(texto).toContain('OpenAlex');
+    expect(texto).not.toContain('Reimberg');
+    expect(texto).not.toContain('Zanoli');
+    expect(fixture.nativeElement.querySelector('details')).toBeNull();
   });
 
   it('permite recuperar uma falha na consulta dos metadados', async () => {

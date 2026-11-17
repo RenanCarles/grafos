@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { NgxEchartsDirective } from 'ngx-echarts';
 import { of, throwError } from 'rxjs';
 import { AREAS_REPOSITORY, type AreasRepository } from '@app/core/repositorios';
+import type { DadosAreas } from '@app/shared/models/dominio';
 import { criarConfigAreasPadrao, criarFiltrosPadrao } from '@app/shared/models/visao';
 import { criarDadosAreasFake, provedoresDadosFake } from '@app/shared/testing/fixtures';
 import { AreasPesquisa } from './areas-pesquisa';
@@ -38,6 +39,20 @@ describe('AreasPesquisa', () => {
       add: { imports: [EchartsFalso] },
     });
     await TestBed.compileComponents();
+  });
+
+  it('emite os dados de áreas carregados', async () => {
+    fixture = TestBed.createComponent(AreasPesquisa);
+    const emitidos: DadosAreas[] = [];
+    fixture.componentInstance.dadosCarregados.subscribe((dados) => emitidos.push(dados));
+    fixture.componentRef.setInput('filtros', criarFiltrosPadrao());
+    fixture.componentRef.setInput('config', criarConfigAreasPadrao());
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(emitidos.length).toBeGreaterThan(0);
+    expect(emitidos.at(-1)?.areas).toHaveLength(3);
   });
 
   it('explica a ausência de áreas e ainda apresenta barras por instituto', async () => {

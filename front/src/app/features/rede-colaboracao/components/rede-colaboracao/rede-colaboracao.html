@@ -163,38 +163,6 @@
       vértice para ver quem é. Clique na legenda para destacar o instituto ou a comunidade.
     </p>
   }
-
-  <section class="comunidades" aria-label="Comunidades de colaboração">
-    <h2>Comunidades</h2>
-    <p class="dica">
-      Louvain na coautoria de 2021–2025. O número não é um instituto nem uma área de pesquisa. O
-      filtro não refaz o grupo.
-    </p>
-    @if (comunidades().grupos.length > 0) {
-      <ul>
-        @for (grupo of comunidades().grupos; track grupo.indice) {
-          <li>
-            <button
-              type="button"
-              [attr.aria-pressed]="comunidadePressionada(grupo.indice)"
-              (click)="abrirComunidade(grupo.indice)"
-            >
-              Grupo {{ grupo.numero }} · {{ grupo.pessoas }}
-              {{ grupo.pessoas === 1 ? 'pessoa' : 'pessoas' }} · {{ grupo.institutos.join(', ') }}
-            </button>
-          </li>
-        }
-      </ul>
-    }
-    @if (comunidades().isolados > 0) {
-      <p class="dica">
-        {{ comunidades().isolados }}
-        {{ comunidades().isolados === 1 ? 'docente fica' : 'docentes ficam' }} em grupo de uma
-        pessoa, sem coautoria com outro docente nesta coleta. Isso não prova ausência de colaboração
-        fora das publicações indexadas.
-      </p>
-    }
-  </section>
 }
 <p class="dica">
   Grau, força, intermediação, comunidades, parceiros em outro instituto e institutos do grupo
