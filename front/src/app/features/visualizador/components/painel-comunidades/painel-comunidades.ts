@@ -44,9 +44,6 @@ import { resumirComunidades } from '@app/features/rede-colaboracao/services/resu
   styles: `
     :host {
       display: block;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--viz-grid);
     }
     h2 {
       margin: 0;

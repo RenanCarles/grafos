@@ -19,14 +19,18 @@
         (redeCarregada)="redeCarregada.set($event)"
       />
       @if (v.tipo === 'rede') {
-        <aside class="painel" aria-label="Detalhes do pesquisador">
-          <app-painel-pesquisador [no]="noSelecionado()" />
-          <app-painel-comunidades
-            [entrada]="redeCarregada()"
-            [selecionado]="grupoSelecionado()"
-            (selecionar)="grupoSelecionado.set($event)"
-          />
-        </aside>
+        <div class="paineis">
+          <aside class="painel" aria-label="Detalhes do pesquisador">
+            <app-painel-pesquisador [no]="noSelecionado()" />
+          </aside>
+          <aside class="painel" aria-label="Comunidades de colaboração">
+            <app-painel-comunidades
+              [entrada]="redeCarregada()"
+              [selecionado]="grupoSelecionado()"
+              (selecionar)="grupoSelecionado.set($event)"
+            />
+          </aside>
+        </div>
       }
     </div>
   }

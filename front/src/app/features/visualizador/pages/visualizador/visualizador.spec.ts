@@ -74,18 +74,19 @@ describe('Visualizador', () => {
     expect(raiz().querySelector('aside')?.textContent).toContain('Ana Souza');
   });
 
-  it('lista as comunidades no painel da direita, depois dos detalhes do pesquisador', async () => {
+  it('lista as comunidades em um painel próprio, ao lado dos detalhes do pesquisador', async () => {
     await abrir('v-rede');
     const falsa = fixture.debugElement.query(By.directive(VisualizacaoFalsa)).injector.get(VisualizacaoFalsa);
     falsa.redeCarregada.emit({ rede: criarRedeFake(), catalogo: criarCatalogoFake() });
     await fixture.whenStable();
     fixture.detectChanges();
 
-    const painel = raiz().querySelector('aside')!;
-    expect(painel.textContent).toContain('Comunidades');
-    expect(painel.textContent).toContain('Grupo 1 · 2 pessoas');
-    const detalhes = painel.querySelector('app-painel-pesquisador')!;
-    const comunidades = painel.querySelector('app-painel-comunidades')!;
+    const [painelDetalhes, painelComunidades] = Array.from(raiz().querySelectorAll('aside'));
+    expect(painelDetalhes.textContent).not.toContain('Comunidades');
+    expect(painelComunidades.textContent).toContain('Comunidades');
+    expect(painelComunidades.textContent).toContain('Grupo 1 · 2 pessoas');
+    const detalhes = painelDetalhes.querySelector('app-painel-pesquisador')!;
+    const comunidades = painelComunidades.querySelector('app-painel-comunidades')!;
     expect(detalhes.compareDocumentPosition(comunidades) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 

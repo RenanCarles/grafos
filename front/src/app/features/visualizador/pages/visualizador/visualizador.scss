@@ -36,8 +36,16 @@ h1 {
   min-width: 0;
 }
 .conteudo.com-painel {
-  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: stretch;
+}
+
+.paineis {
+  display: grid;
+  grid-template-columns: 280px 280px;
+  gap: 16px;
+  min-width: 0;
+  min-height: 0;
 }
 
 .painel {
@@ -50,8 +58,24 @@ h1 {
   background: var(--viz-surface);
 }
 
+@media (max-width: 1360px) {
+  .paineis {
+    grid-template-columns: 280px;
+    grid-auto-rows: minmax(0, auto);
+  }
+}
+
 @media (max-width: 960px) {
   .conteudo.com-painel {
+    grid-template-columns: 1fr;
+  }
+  .paineis {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .paineis {
     grid-template-columns: 1fr;
   }
 }
