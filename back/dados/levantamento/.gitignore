@@ -1,0 +1,8 @@
+# Evidências de coleta preservadas só localmente (HTML contém estado de sessão).
+fontes/
+arquivo_local/
+# Enumeração ampla, fora do recorte de entrega; os itens utilizados têm extrato próprio.
+repositorio_oai_bruto.json
+repositorio_completo_2021_2025.json
+# Histórico exploratório; os registros finais estão nas bases consolidadas.
+amostra_tfg_2021_2025.json

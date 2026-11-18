@@ -1,0 +1,69 @@
+{
+  "versao": "1.0.0",
+  "preparado_em": "2026-11-18",
+  "coleta_em": "2026-11-17",
+  "periodo": [
+    2021,
+    2025
+  ],
+  "status": "entrega de dados; validação acadêmica pendente",
+  "total_registros": 1041,
+  "prioridade_imc": 594,
+  "arquivos": [
+    {
+      "arquivo": ".gitignore",
+      "bytes": 370,
+      "sha256": "52c45e9e6d1ca2b9b84607677ee5e014f68e6ed5eb08e7ec08e88847c9876ee7"
+    },
+    {
+      "arquivo": "README.md",
+      "bytes": 6947,
+      "sha256": "faa799ee993b24a529dd77f6e9b39cee0de380e1400210d26e272e02aec11adf"
+    },
+    {
+      "arquivo": "LEVANTAMENTO_METODOLOGIA.md",
+      "bytes": 27262,
+      "sha256": "2c063b20916196fc5332a72a57abe9880f83d386d7b3cb7ba7bbc8a6db078d94"
+    },
+    {
+      "arquivo": "base_trabalhos.json",
+      "bytes": 1668883,
+      "sha256": "caadf46f0611c6e3cb2e54369f11f9a3cb2a5a9e202a8d177c8e666e38f050ef"
+    },
+    {
+      "arquivo": "base_prioridade_imc.json",
+      "bytes": 907289,
+      "sha256": "78760de2d4492e834f7483da7a60c4d42f9f1ca4dd88eb0e318ae8c40372253a"
+    },
+    {
+      "arquivo": "docentes_imc_referencia.json",
+      "bytes": 11114,
+      "sha256": "e71b783f42aab08c134407a4e34c6a1cc22731a070e84c5eefa9ab4ab00223ca"
+    },
+    {
+      "arquivo": "schema_base.schema.json",
+      "bytes": 2253,
+      "sha256": "f91afb3035a56be69762931c60f0b0c3fd785239ba47d650a5a452cce7f25a0a"
+    },
+    {
+      "arquivo": "contagens.json",
+      "bytes": 1134,
+      "sha256": "b38ff132c4481218e224277e2dd20224ecb20bcb9f41fcb7eae4d8389b906c63"
+    },
+    {
+      "arquivo": "consulta_base.html",
+      "bytes": 495357,
+      "sha256": "11911578a3de8f39a15fb2bba035809c856d26a82f5a70485352b738b1f7070d"
+    },
+    {
+      "arquivo": "catalogo_tfg_bruto.json",
+      "bytes": 1926584,
+      "sha256": "b9489a56e46b09f41224461c010872495c06536f67fb6c3b394592486e9deb04"
+    },
+    {
+      "arquivo": "fontes_repositorio_selecionadas.json",
+      "bytes": 353956,
+      "sha256": "27df4136a5de2e5f536de5dbfe3f054522f3994db7f7d2c795591f2abcde5094"
+    }
+  ]
+}

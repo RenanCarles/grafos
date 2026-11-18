@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Base acadêmica UNIFEI 1.0.0",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "tipo",
+      "ano",
+      "titulo",
+      "autores",
+      "participacoes",
+      "prioridade_imc",
+      "campus",
+      "campus_confirmado",
+      "fonte",
+      "url",
+      "coleta",
+      "pendencias",
+      "status_validacao",
+      "versao_base"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "tipo": {
+        "type": "string"
+      },
+      "ano": {
+        "type": "integer",
+        "minimum": 2021,
+        "maximum": 2025
+      },
+      "titulo": {
+        "type": "string",
+        "minLength": 1
+      },
+      "autores": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "participacoes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "nome_fonte",
+            "papel",
+            "docente_imc"
+          ],
+          "properties": {
+            "nome_fonte": {
+              "type": "string",
+              "minLength": 1
+            },
+            "papel": {
+              "enum": [
+                "orientador",
+                "coorientador",
+                "coautor",
+                "banca"
+              ]
+            },
+            "docente_imc": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          }
+        }
+      },
+      "prioridade_imc": {
+        "type": "boolean"
+      },
+      "campus": {
+        "enum": [
+          "Itajubá",
+          null
+        ]
+      },
+      "campus_confirmado": {
+        "type": "boolean"
+      },
+      "fonte": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string",
+        "pattern": "^https?://"
+      },
+      "coleta": {
+        "type": "string"
+      },
+      "pendencias": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "status_validacao": {
+        "type": "string"
+      },
+      "versao_base": {
+        "const": "1.0.0"
+      }
+    },
+    "additionalProperties": true
+  }
+}

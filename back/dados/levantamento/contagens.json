@@ -1,0 +1,47 @@
+{
+  "total": 1041,
+  "prioridade_imc": 594,
+  "fontes": {
+    "Catálogo SIGAA UNIFEI": 659,
+    "Repositório institucional UNIFEI": 71,
+    "OpenAlex — coleta já existente no projeto": 311
+  },
+  "imc_fontes": {
+    "Catálogo SIGAA UNIFEI": 212,
+    "Repositório institucional UNIFEI": 71,
+    "OpenAlex — coleta já existente no projeto": 311
+  },
+  "por_ano": {
+    "2021": 196,
+    "2022": 201,
+    "2023": 186,
+    "2024": 230,
+    "2025": 228
+  },
+  "por_tipo": {
+    "TCC/TFG": 659,
+    "Dissertação": 70,
+    "Tese": 1,
+    "review": 8,
+    "article": 189,
+    "book-chapter": 10,
+    "conference-paper": 89,
+    "book": 1,
+    "preprint": 9,
+    "editorial": 2,
+    "dataset": 1,
+    "conference-abstract": 1,
+    "supplementary-materials": 1
+  },
+  "tcc_com_participacao": 632,
+  "tcc_com_orientador": 632,
+  "tcc_com_coorientador": 213,
+  "campus_confirmado": 658,
+  "pendencias": {
+    "curso_e_papeis_sem_conferencia_no_documento": 659,
+    "documentos_sem_verificacao_de_conteudo": 376,
+    "identidade_por_nome_requer_revisao": 479,
+    "orientacao_nao_recuperada": 27,
+    "campus_nao_confirmado": 383
+  }
+}
